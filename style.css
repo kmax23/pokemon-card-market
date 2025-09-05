@@ -1,0 +1,84 @@
+body {
+    font-family: "Fredoka One", sans-serif;
+    font-weight: 400;
+    background-color: #f8f9fa;
+    /* light background */
+    color: #212529;
+}
+
+h2,
+h3,
+h4 {
+    font-family: "Fredoka One", sans-serif;
+}
+
+#topBar {
+    display: block;
+    /* stack elements vertically */
+    margin-bottom: 20px;
+}
+
+#topBar h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+#cardIndex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+#indexText {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+#indexChart {
+    width: 100%;
+    /* take remaining horizontal space */
+    height: 500px;
+    max-width: 1600px;
+}
+
+#cardChart {
+    width: 100%;    /* fills the container */
+    height: 150px;  /* desired height */
+    display: block;
+    box-sizing: border-box;
+}
+
+#mainContent div:nth-child(2) { /* the Price Trend column */
+    height: 150px;
+}
+
+#cardTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cardTable th,
+#cardTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+#cardTable td canvas {
+    display: block;
+    margin: auto;
+}
+
+#cardTable tr:hover {
+    background-color: #FFE066;
+    cursor: pointer;
+}
+
+#cardTable tbody td.positive {
+    color: #38D9A9;
+}
+
+#cardTable tbody td.negative {
+    color: #FF4C4C;
+}

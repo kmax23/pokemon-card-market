@@ -1,0 +1,66 @@
+{
+  "mostExpensive": [
+    {
+      "name": "Pikachu Illustrator",
+      "set": "1998 Illustration Contest",
+      "price": 5275000,
+      "details": "Awarded to winners of a 1998 illustration contest, extremely rare, PSA 10 graded copy sold for $5.275 million."
+    },
+    {
+      "name": "Charizard",
+      "set": "1st Edition Shadowless Holo",
+      "price": 420000,
+      "details": "Iconic card from Base Set, PSA 10 graded copy sold for $420,000."
+    },
+    {
+      "name": "Blastoise",
+      "set": "Commissioned Presentation Galaxy Star Holo",
+      "price": 360000,
+      "details": "One of only two known copies, CGC 8.5 graded copy sold for $360,000."
+    },
+    {
+      "name": "Kangaskhan-Holo #115",
+      "set": "Family Event Trophy Card",
+      "price": 68321,
+      "details": "Awarded at 1998 Family Event in Japan, PSA 10 graded copy sold for $68,321."
+    },
+    {
+      "name": "Charizard",
+      "set": "Japanese No Rarity Symbol Holo",
+      "price": 324000,
+      "details": "Released in 1996, notable for lack of rarity symbol, PSA 10 graded copy sold for $324,000."
+    }
+  ],
+  "leastExpensive": [
+    {
+      "name": "Lapras",
+      "set": "1st Edition Fossil",
+      "price": 5,
+      "details": "Despite being a 1st Edition card, Lapras from Fossil set is relatively inexpensive."
+    },
+    {
+      "name": "Ralts",
+      "set": "Sword & Shield",
+      "price": 0.25,
+      "details": "Common card from modern set, typical low value."
+    },
+    {
+      "name": "Magnemite",
+      "set": "Sword & Shield",
+      "price": 0.30,
+      "details": "Common card from modern set, typical low value."
+    },
+    {
+      "name": "Basic Energy",
+      "set": "Various",
+      "price": 0.15,
+      "details": "Abundant basic energy cards have minimal collectible value."
+    },
+    {
+      "name": "Potion",
+      "set": "Base Set",
+      "price": 0.50,
+      "details": "Common Trainer card, low collectible value."
+    }
+  ]
+}

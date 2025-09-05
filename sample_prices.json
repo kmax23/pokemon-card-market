@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Pikachu VMAX",
+    "set": "Sword & Shield",
+    "number": "145",
+    "imageUrl": "https://images.pokemontcg.io/swsh1/145.png",
+    "price": 45.99,
+    "affiliateLink": "#"
+  },
+  {
+    "name": "Charizard V",
+    "set": "Sword & Shield",
+    "number": "19",
+    "imageUrl": "https://images.pokemontcg.io/swsh1/19.png",
+    "price": 399.99,
+    "affiliateLink": "#"
+  },
+  {
+    "name": "Snorlax V",
+    "set": "Sword & Shield",
+    "number": "197",
+    "imageUrl": "https://images.pokemontcg.io/swsh1/197.png",
+    "price": 25.50,
+    "affiliateLink": "#"
+  }
+]

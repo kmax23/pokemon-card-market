@@ -1,0 +1,20 @@
+# Python virtual environment
+venv/
+*.env
+
+# Generated data
+prices.json
+*.log
+__pycache__/
+*.pyc
+
+# Optional: ignore sample files if you want
+# sample_prices.json
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db

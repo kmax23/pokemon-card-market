@@ -1,52 +1,57 @@
 // script.js
 
-const API_KEY = 'ae52bd98-3712-42b9-a7fa-8d1e03f2ff21'; // Replace with your API key
-const BASE_URL = 'https://api.pokemontcg.io/v2/cards';
-const SET_ID = 'base1'; // Only fetch Base Set cards
-const PAGE_SIZE = 250; // Max allowed
+// Fetch cards from Supabase
+async function fetchCards(limit=250) {
+    const { data, error } = await supabase
+        .from("cards")
+        .select(`
+            id,
+            name,
+            number,
+            hp,
+            artist,
+            flavor_text,
+            regulation_mark,
+            sets!cards_set_id_fkey(id, name),
+            rarities!cards_rarity_id_fkey(name),
+            supertypes!cards_supertype_id_fkey(name),
+            prices(market,price_type,updated_at)
+        `).limit(limit);
 
-// Helper function to fetch all Base Set cards with pagination
-async function fetchAllBaseSetCards() {
-    let allCards = [];
-    let page = 1;
-    let totalPages = 1;
+    if (error) {
+        console.error("Error fetching cards:", error);
+        return [];
+    } else {
+        console.log("Fetched cards:", data);
+    }
 
-    do {
-        const response = await fetch(`${BASE_URL}?q=set.id:${SET_ID}&page=${page}&pageSize=${PAGE_SIZE}`, {
-            headers: {
-                'X-Api-Key': API_KEY
-            }
-        });
-        const data = await response.json();
-        allCards = allCards.concat(data.data);
-        const totalCount = data.totalCount;
-        totalPages = Math.ceil(totalCount / PAGE_SIZE);
-        page++;
-    } while (page <= totalPages);
-
-    return allCards;
+    return data;
 }
 
 // Render the card table
 function renderCardTable(cards) {
-    const tableBody = document.querySelector('#cardTable tbody');
-    tableBody.innerHTML = '';
+    const tableBody = document.querySelector("#cardTable tbody");
+    tableBody.innerHTML = "";
 
     cards.forEach(card => {
-        const row = document.createElement('tr');
+        const row = document.createElement("tr");
 
-        const nameCell = document.createElement('td');
+        const nameCell = document.createElement("td");
         nameCell.textContent = card.name;
 
-        const setCell = document.createElement('td');
-        setCell.textContent = card.set.name ? card.set.name.join(', ') : '';
+        const setCell = document.createElement("td");
+        setCell.textContent = card.sets ? card.sets.name : "";
 
-        const rarityCell = document.createElement('td');
-        rarityCell.textContent = card.rarity || '';
+        const rarityCell = document.createElement("td");
+        rarityCell.textContent = card.rarities ? card.rarities.name : "";
 
-        const priceCell = document.createElement('td');
-        const price = card.tcgplayer?.prices?.normal?.market || 'N/A';
-        priceCell.textContent = price;
+        const priceCell = document.createElement("td");
+        // 👇 Placeholder until we add a `prices` table
+        if (card.prices && card.prices.length > 0) {
+            priceCell.textContent = `$${card.prices[0].market.toFixed(2)}`;
+        } else {
+            priceCell.textContent = "N/A";
+        }
 
         row.appendChild(nameCell);
         row.appendChild(setCell);
@@ -57,45 +62,102 @@ function renderCardTable(cards) {
     });
 }
 
-// Render a simple price trend chart (example using Chart.js)
-function renderPriceChart(cards) {
-    const ctx = document.getElementById('cardChart').getContext('2d');
+function attachRowHover(cards) {
+    const rows = document.querySelectorAll("#cardTable tbody tr");
 
-    const labels = cards.map(c => c.name);
-    const prices = cards.map(c => c.tcgplayer?.prices?.normal?.market || 0);
+    rows.forEach((row, i) => {
+        row.addEventListener("mouseenter", async () => {
+            const card = cards[i];
 
-    new Chart(ctx, {
-        type: 'bar',
+            const { data, error } = await supabase
+                .from("daily_prices")
+                .select("date, market")
+                .eq("card_id", card.id)
+                .order("date", { ascending: true });
+
+            if (error) {
+                console.error("Error fetching price history:", error);
+                return;
+            }
+
+            renderPriceChart(card.name, data);
+        });
+    });
+}
+
+let hoverChartInstance = null;
+
+function renderPriceChart(cardName, prices) {
+    const ctx = document.getElementById("hoverChart").getContext("2d");
+
+    // Destroy previous chart if it exists
+    if (hoverChartInstance) {
+        hoverChartInstance.destroy();
+    }
+
+    const labels = prices.map(p => p.date);
+    const values = prices.map(p => p.market);
+
+    hoverChartInstance = new Chart(ctx, {
+        type: "line",
         data: {
             labels: labels,
             datasets: [{
-                label: 'Market Price (USD)',
-                data: prices,
-                backgroundColor: '#38D9A9'
+                label: `${cardName} Price`,
+                data: values,
+                borderColor: "#38D9A9",
+                fill: false
             }]
         },
         options: {
             responsive: true,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: { beginAtZero: true }
-            }
+            plugins: { legend: { display: true } },
+            scales: { y: { beginAtZero: false } }
         }
     });
 }
 
-// Initialize the page
-async function init() {
-    try {
-        const cards = await fetchAllBaseSetCards();
-        renderCardTable(cards);
-        renderPriceChart(cards);
-    } catch (error) {
-        console.error('Error fetching cards:', error);
-    }
+function calculateTotalValue(cards) {
+    return cards.reduce((sum, card) => {
+        if (card.prices && card.prices.length > 0) {
+            return sum + card.prices[0].market;
+        }
+        return sum;
+    }, 0);
 }
 
-// Run initialization on page load
-window.addEventListener('DOMContentLoaded', init);
+// Render a simple chart using HP (placeholder until we wire up prices)
+function renderCardChart(cards) {
+    const ctx = document.getElementById("indexChart").getContext("2d");
+
+    const totalValue = calculateTotalValue(cards);
+    const values = cards.map(c => c.hp || 0);
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["Total Market Value"],
+            datasets: [{
+                label: "Pokemon Card Index",
+                data: [totalValue],
+                backgroundColor: "#38D9A9"
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+}
+
+// Initialize
+async function init() {
+    const cards = await fetchCards();
+    renderCardTable(cards);
+    attachRowHover(cards);
+    renderCardChart(cards);
+}
+
+window.addEventListener("DOMContentLoaded", init);

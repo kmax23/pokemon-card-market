@@ -3,8 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Pokémon Card Market</title>
+    <title>Poké Stock Market</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = "https://qptdfdlkrifcombblzaw.supabase.co";
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwdGRmZGxrcmlmY29tYmJsemF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwOTA1NTEsImV4cCI6MjA3MjY2NjU1MX0.uEasItbNGXXNwl5bb_8YHYgaUkh9rUC9chfisMaaA-o";
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
@@ -13,30 +19,55 @@
 
 <body>
     <!-- Top Bar / Index -->
-    <div id="topBar">
-        <h1>Pokémon Card Market</h1>
-        <div id="cardIndex">
-            <span id="indexText">Pokémon Card Index: --</span>
-            <canvas id="indexChart"></canvas>
+    <header id="navbar">
+        <div class="container">
+            <div id="logo">
+                <h1>Poké Stock Market</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#cards">Cards</a></li>
+                    <li><a href="#sets">Sets</a></li>
+                    <li><a href="#sealed">Sealed Products</a></li>
+                </ul>
+            </nav>
+
+            <!-- Dark/Light toggle-->
+            <button id="themeToggle">Dark</button>
+
+            <!-- Search bar -->
+            <div id="navbarSearch">
+                <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
+                <button id="searchBtn">Search</button>
+            </div>
         </div>
-    </div>
+    </header>
 
-    <div style="margin-bottom: 10px;">
-        <input type="text" id="cardSearch" placeholder="Search cards..." style="width: 200px; padding: 5px;">
-    </div>
+    <!-- Top Movers Section -->
+    <section id="topMovers" class="grid">
+        <!-- Gainers -->
+        <div>
+            <h2>Top Gainers</h2>
+            <div id="topGainers"></div>
+        </div>
+        <!-- Losers -->
+        <div>
+            <h2>Top Losers</h2>
+            <div id="topLosers"></div>
+        </div>
+    </section>
 
-    <div id="marketSnapshot" style="display:flex; gap:20px; margin-bottom:15px;">
-        <div>Total Cards: <span id="totalCards">--</span></div>
-        <div>Average Price: $<span id="avgPrice">--</span></div>
-        <div>Biggest Gainer: <span id="biggestGainer">--</span></div>
-        <div>Biggest Loser: <span id="biggestLoser">--</span></div>
-    </div>
+    <!-- All Cards + Chart Section -->
+    <section id="allCardsSection" style="margin-top: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
 
-    <!-- Main Content -->
-    <div id="mainContent" style="display: flex; gap: 20px; margin-top: 20px;">
-        <!-- Left: Table -->
-        <div style="flex: 2;">
-            <h2>Portfolio</h2>
+        <!-- Left: Card List -->
+        <div id="allCards">
+            <h2>All Cards</h2>
+            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                <input type="text" id="cardSearch" placeholder="Search cards..." style="flex: 1; padding: 5px;">
+                <input type="text" id="setSearch" placeholder="Search sets..." style="flex: 1; padding: 5px;">
+            </div>
+
             <table id="cardTable">
                 <thead>
                     <tr>
@@ -54,23 +85,10 @@
             </table>
         </div>
 
-        <!-- Middle: Big Price Trend Chart -->
-        <div style="flex: 3; height: 250px;">
-            <h2>Price Trend</h2>
-            <canvas id="cardChart"></canvas>
-        </div>
-
-        <!-- Right: Top Movers Sidebar -->
-        <div style="flex: 1; min-width: 200px;">
-            <h3>Top Movers</h3>
-            <div>
-                <h4>Gainers</h4>
-                <div id="topGainers"></div>
-            </div>
-            <div style="margin-top: 20px;">
-                <h4>Losers</h4>
-                <div id="topLosers"></div>
-            </div>
+        <!-- Right: Hover Chart -->
+        <div id="hoverChartContainer">
+            <h3>Price History</h3>
+            <canvas id="hoverChart"></canvas>
         </div>
     </div>
 

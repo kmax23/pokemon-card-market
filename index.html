@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Poké Stock Market</title>
+    <title>Poké Stocks</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
@@ -14,28 +14,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- HEAD: quick-theme detection (place BEFORE your stylesheet link) -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('theme'); // "dark" or "light"
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = saved ? (saved === 'dark') : prefersDark;
+                if (isDark) document.documentElement.classList.add('dark');
+            } catch (e) {
+                // ignore (e.g. privacy mode)
+            }
+        })();
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <meta name='impact-site-verification' value='6e1b4ff6-9dda-4113-aa8a-dac77a4533b6'>
 </head>
 
 <body>
-    <!-- Top Bar / Index -->
+    <!-- NAVBAR -->
     <header id="navbar">
         <div class="container">
             <div id="logo">
-                <h1>Poké Stock Market</h1>
+                <h1>Poké Stocks</h1>
             </div>
             <nav>
                 <ul>
-                    <li><a href="#cards">Cards</a></li>
-                    <li><a href="#sets">Sets</a></li>
-                    <li><a href="#sealed">Sealed Products</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="sets.html">Sets</a></li>
+                    <li><a href="sealed.html">Sealed Products</a></li>
                 </ul>
             </nav>
-
             <!-- Dark/Light toggle-->
             <button id="themeToggle">Dark</button>
-
             <!-- Search bar -->
             <div id="navbarSearch">
                 <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
@@ -44,54 +56,31 @@
         </div>
     </header>
 
-    <!-- Top Movers Section -->
-    <section id="topMovers" class="grid">
-        <!-- Gainers -->
-        <div>
-            <h2>Top Gainers</h2>
-            <div id="topGainers"></div>
-        </div>
-        <!-- Losers -->
-        <div>
-            <h2>Top Losers</h2>
-            <div id="topLosers"></div>
-        </div>
-    </section>
-
-    <!-- All Cards + Chart Section -->
-    <section id="allCardsSection" style="margin-top: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
-
-        <!-- Left: Card List -->
-        <div id="allCards">
-            <h2>All Cards</h2>
-            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
-                <input type="text" id="cardSearch" placeholder="Search cards..." style="flex: 1; padding: 5px;">
-                <input type="text" id="setSearch" placeholder="Search sets..." style="flex: 1; padding: 5px;">
+    <main>
+        <!-- STOCK TICKER -->
+        <section id="topMoversTicker">
+            <div class="ticker-wrapper">
+                <div id="tickerContent">
+                    <!-- JS will populate with top movers -->
+                </div>
             </div>
+        </section>
 
-            <table id="cardTable">
-                <thead>
-                    <tr>
-                        <th>Card</th>
-                        <th>Set</th>
-                        <th>Price</th>
-                        <th>Change %</th>
-                        <th>Trend</th>
-                        <th>Buy</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Populated by JS -->
-                </tbody>
-            </table>
-        </div>
+        <!-- INDEX CHART -->
+        <section id="indexSection">
+            <h2>Pokémon Card Index</h2>
+            <canvas id="indexChart" width="1000" height="400"></canvas>
+        </section>
 
-        <!-- Right: Hover Chart -->
-        <div id="hoverChartContainer">
-            <h3>Price History</h3>
-            <canvas id="hoverChart"></canvas>
-        </div>
-    </div>
+        <!-- ARTICLES -->
+        <section id="articles">
+            <h2>Latest Articles from TCGplayer</h2>
+            <div id="articlesGrid">
+                <!-- Populate later with TCGplayer API or RSS feed -->
+                <p>Coming soon...</p>
+            </div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>

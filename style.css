@@ -1,79 +1,276 @@
-body {
-    font-family: "Fredoka One", sans-serif;
-    font-weight: 400;
-    background-color: #f8f9fa;
-    color: #212529;
+html {
+  font-family: "Fredoka One", sans-serif;
+  font-weight: 400;
+  background-color: #FAFAFA;
+  color: #222;
+  margin: 0;
+  padding: 0;
 }
 
-h2, h3, h4 {
-    font-family: "Fredoka One", sans-serif;
+h1, h2, h3, h4 {
+  font-family: "Fredoka One", sans-serif;
+  margin: 0;
 }
 
-#topBar {
-    display: block;
-    margin-bottom: 20px;
+/* NAVBAR */
+#navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #FFCB05;
+  color: #222;
+  padding: 15px 30px;
 }
 
-#topBar h1 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
+#navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#cardIndex {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    height: 150px;
+#logo h1 {
+  font-size: 1.6rem;
+  color: #3B4CCA;
 }
 
-#indexText {
-    font-size: 0.9rem;
-    font-weight: bold;
+#navbar nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+#navbar nav ul li a {
+  color: #3B4CCA;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#navbar nav ul li a:hover {
+  color: #FF1C1C;
+}
+
+#navbarSearch {
+  display: flex;
+  gap: 8px;
+  margin-left: 20px;
+}
+
+#navbarSearch input {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 2px solid #FFD700;
+  outline: none;
+}
+
+#navbarSearch button,
+#themeToggle {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #FF1C1C;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+#navbarSearch button:hover,
+#themeToggle:hover {
+  background-color: #3B4CCA;
+  color: #FFD700;
+}
+
+#themeToggle {
+  margin-left: 15px;
+}
+
+/* TICKER */
+#topMoversTicker {
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #FFCB05;
+  color: #222;
+  padding: 12px 0;
+  border-top: 2px solid #3B4CCA;
+  border-bottom: 2px solid #3B4CCA;
+}
+
+#tickerContent {
+  display: inline-block;
+  padding-left: 100%;
+  animation: tickerMove 25s linear infinite;
+}
+
+@keyframes tickerMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.tickerItem {
+  display: inline-block;
+  margin-right: 60px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.tickerItem.positive {
+  color: #4DB6AC;
+}
+
+.tickerItem.negative {
+  color: #FF1C1C;
+}
+
+/* INDEX SECTION */
+#indexSection {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+}
+
+#indexSection h2 {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
 }
 
 #indexChart {
-    width: 100%;
-    height: 800px;
-    max-width: 1600px;
+  width: 90%;
+  max-width: 1200px;
+  height: 500px;
+  margin: 0 auto 50px auto;
+  background: linear-gradient(180deg, #FAFAFA 0%, #FFF9C4 100%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-#cardChart {
-    width: 100%;
-    height: 250px;
-    display: block;
-    box-sizing: border-box;
+/* ARTICLES */
+#articles {
+  padding: 40px 20px;
+  background-color: #f1f3f5;
 }
 
-#mainContent div:nth-child(2) {
-    height: 250px;
+#articles h2 {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
+#articlesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+#articlesGrid p {
+  text-align: center;
+  color: #555;
+}
+
+/* TABLE (cards view, reused later) */
 #cardTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-#cardTable th, #cardTable td {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-    text-align: center;
-}
-
-#cardTable td canvas {
-    display: block;
-    margin: auto;
+#cardTable th,
+#cardTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
 }
 
 #cardTable tr:hover {
-    background-color: #FFE066;
-    cursor: pointer;
+  background-color: #FFEE58;
+  cursor: pointer;
 }
 
 #cardTable tbody td.positive {
-    color: #38D9A9;
+  color: #4DB6AC;
 }
 
 #cardTable tbody td.negative {
-    color: #FF4C4C;
+  color: #FF1C1C;
+}
+
+#cardChart {
+    background: linear-gradient(180deg, #FAFAFA 0%, #C8E6C9 100%);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* ===================== */
+/* DARK MODE THEME */
+/* ===================== */
+
+html.dark {
+  background-color: #3B4CCA;
+  color: #FFD700;
+}
+
+html.dark a {
+    color: #9be7d1;
+}
+
+html.dark #navbar {
+  background-color: #0e0e10;
+  color: #FFD700;
+}
+
+html.dark #navbar nav ul li a {
+  color: #FFD700;
+}
+
+html.dark #navbar nav ul li a:hover {
+  color: #38D9A9;
+}
+
+html.dark #navbarSearch input {
+  background: #111;
+  color: #eaeaea;
+  border: 1px solid #FFD700;
+}
+
+html.dark #navbarSearch button,
+html.dark #themeToggle {
+  background-color: #FFD700;
+  color: #111;
+}
+
+html.dark #topMoversTicker {
+  background-color: #222;
+  border-top: 2px solid #FFD700;
+  border-bottom: 2px solid #FFD700;
+  color: #FFD700;
+}
+
+html.dark #articles {
+  background-color: #1a1a1a;
+}
+
+html.dark #cardTable {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+html.dark #cardTable tr:hover {
+    background-color: #FFD700;
+}
+
+html.dark #cardTable tbody td.positive {
+    color: #4DB6AC;
+}
+
+html.dark #cardTable tbody td.negative {
+    color: #FF1C1C;
+}
+
+html.dark #cardTable th,
+html.dark #cardTable td {
+  border-bottom: 1px solid #333;
 }

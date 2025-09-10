@@ -1,5 +1,13 @@
 // script.js
 
+const colors = {
+    pikachuYellow: "#FFEB3B",
+    charizardRed: "#FF1C1C",
+    bulbasaurTeal: "#4DB6AC",
+    pokeballBlue: "#3B4CCA",
+    electricHover: "#rgba(255,238,88,0.2)"
+};
+
 // Fetch cards from Supabase
 async function fetchCards(limit=250) {
     const { data, error } = await supabase
@@ -26,6 +34,22 @@ async function fetchCards(limit=250) {
     }
 
     return data;
+}
+
+async function populateTicker() {
+    const { data } = await supabase
+        .from("daily_prices")
+        .select(`card_id, market, card_name`)
+        .order("percentage_change", {ascending: false })
+        .limit(50);
+
+    const ticker = document.getElementById("tickerContent");
+    data.forEach(card => {
+        const span = document.createElement("span");
+        span.className = "tickerItem";
+        span.textContent = `${card.card_name}: ${card.percentage_change.toFixed(2)}%`;
+        ticker.appendChild(span);
+    });
 }
 
 // Render the card table
@@ -105,14 +129,25 @@ function renderPriceChart(cardName, prices) {
             datasets: [{
                 label: `${cardName} Price`,
                 data: values,
-                borderColor: "#38D9A9",
-                fill: false
+                borderColor: colors.bulbasaurTeal,
+                backgroundColor: colors.electricHover,
+                fill: false,
+                tension: 0.2,
+                borderWidth: 3,
+                pointBackgroundColor: colors.pikachuYellow,
+                pointRadius: 4
             }]
         },
         options: {
             responsive: true,
-            plugins: { legend: { display: true } },
-            scales: { y: { beginAtZero: false } }
+            plugins: {
+                legend: { display: true },
+                tooltip: {mode: 'index', intersect: false }
+            },
+            scales: {
+                x: { display: true },
+                y: { beginAtZero: false, ticks: { color: colors.pokeballBlue } }
+            }
         }
     });
 }
@@ -127,27 +162,40 @@ function calculateTotalValue(cards) {
 }
 
 // Render a simple chart using HP (placeholder until we wire up prices)
-function renderCardChart(cards) {
-    const ctx = document.getElementById("indexChart").getContext("2d");
+async function renderCardIndexChart() {
+    const { data } = await supabase
+        .from("daily_prices")
+        .select("date, market");
 
-    const totalValue = calculateTotalValue(cards);
-    const values = cards.map(c => c.hp || 0);
+    const labels = data.map(d => d.date);
+    const values = data.map(d => d.market);
 
-    new Chart(ctx, {
-        type: "line",
+    new Chart(document.getElementById("indexChart"), {
+        type: 'line',
         data: {
-            labels: ["Total Market Value"],
+            labels,
             datasets: [{
-                label: "Pokemon Card Index",
-                data: [totalValue],
-                backgroundColor: "#38D9A9"
+                label: "Pokémon Card Index",
+                data: values,
+                borderColor: colors.pikachuYellow,
+                backgroundColor: colors.electricHover,
+                fill: true,
+                tension: 0.2,
+                borderWidth: 3,
+                pointBackgroundColor: colors.pikachuYellow,
+                pointRadius: 4
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+            plugins: {
+                legend: { display: true },
+                tooltip: { mode: 'index', intersect: false }
+            },
+            scales: {
+                x: { ticks: { color: colors.pokeballBlue } },
+                y: { ticks: { color: colors.pokeballBlue } }
+            }
         }
     });
 }
@@ -161,3 +209,33 @@ async function init() {
 }
 
 window.addEventListener("DOMContentLoaded", init);
+
+// THEME TOGGLE: robust init + localStorage + button text
+function initThemeToggle() {
+  const btn = document.getElementById("themeToggle");
+  if (!btn) {
+    console.warn("themeToggle button not found");
+    return;
+  }
+
+  const setBtnText = () => {
+    btn.textContent = document.documentElement.classList.contains("dark") ? "Light" : "Dark";
+  };
+
+  // initialize button text
+  setBtnText();
+
+  btn.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    setBtnText();
+  });
+}
+
+// ensure it runs after DOM is ready (works whether script is loaded in head or end of body)
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initThemeToggle);
+} else {
+  initThemeToggle();
+}
+

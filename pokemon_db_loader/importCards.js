@@ -41,13 +41,28 @@ function transformCard(card, setId) {
     };
 }
 
-async function insertCards(cards) {
-    const { data, error } = await supabase.from('cards').insert(cards);
-    if (error) {
-        console.error("Error inserting cards:", error);
-    } else {
-        console.log(`Inserted ${cards.length} cards`);
+function transformSealed(card, setId) {
+    return {
+        id: card.productId,
+        name: card.name,
+        image_url: card.imageUrl,
+        url: card.url,
+        set_id: setId
     }
+}
+
+async function insertCards(cards) {
+    if (cards.length === 0) return;
+    const { error } = await supabase.from('cards').insert(cards);
+    if (error) console.error("❌ Error inserting cards:", error);
+    else console.log(`✅ Inserted ${cards.length} cards`);
+}
+
+async function insertSealed(sealed) {
+    if (sealed.length === 0) return;
+    const { error } = await supabase.from('sealed_products').insert(sealed);
+    if (error) console.error("❌ Error inserting sealed products:", error);
+    else console.log(`📦 Inserted ${sealed.length} sealed products`);
 }
 
 async function importAllCards() {
@@ -56,16 +71,30 @@ async function importAllCards() {
     for (const set of sets) {
         console.log(`Fetching cards for set: ${set.name} (${set.id})`);
         try {
-            const groupId = set.groupId || null;
             const rawCards = await fetchCardsForSet(set.id);
-            const cards = rawCards.map(card => transformCard(card, set.id));
+
+            const cards = [];
+            const sealed = [];
+            rawCards.forEach(raw => {
+                const card = transformCard(raw, set.id);
+
+                // If it looks like a sealed product → move to sealed_products
+                if (!card.number && !card.rarity && !card.card_type && !card.stage) {
+                    sealed.push(transformSealed(raw, set.id));
+                } else {
+                    cards.push(card);
+                }
+            });
+
             await insertCards(cards);
+            await insertSealed(sealed);
+
         } catch (err) {
-            console.error(`Error importing set ${set.name}:`, err.message);
+            console.error(`❌ Error importing set ${set.name}:`, err.message);
         }
     }
 
-    console.log("All sets processed.");
+    console.log("🎉 All sets processed.");
 }
 
 importAllCards();

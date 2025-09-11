@@ -1,8 +1,10 @@
 {
     "type": "module",
-  "dependencies": {
-    "@supabase/supabase-js": "^2.57.4",
-    "dotenv": "^17.2.2",
-    "node-fetch": "^3.3.2"
-  }
+    "dependencies": {
+        "@supabase/supabase-js": "^2.57.4",
+        "7zip-min": "^2.1.0",
+        "decompress": "^4.2.1",
+        "dotenv": "^17.2.2",
+        "node-fetch": "^3.3.2"
+    }
 }

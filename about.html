@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About Us | Poké Stocks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5524633691531456"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- HEAD: quick-theme detection (place BEFORE your stylesheet link) -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('theme'); // "dark" or "light"
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = saved ? (saved === 'dark') : prefersDark;
+                if (isDark) document.documentElement.classList.add('dark');
+            } catch (e) {
+                // ignore (e.g. privacy mode)
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <meta name='impact-site-verification' value='6e1b4ff6-9dda-4113-aa8a-dac77a4533b6'>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="container">
+            <div id="logo">
+                <h1>Poké Stocks</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="sets.html">Sets</a></li>
+                    <li><a href="sealed.html">Sealed Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div id="navbarSearchWrapper">
+                <!-- Dark/Light Toggle Switch -->
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <!-- Search bar -->
+                <div id="navbarSearch">
+                    <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- STOCK TICKER -->
+        <section id="topMoversTicker">
+            <div class="ticker-wrapper">
+                <div id="tickerContent">
+                    <!-- JS will populate with top movers -->
+                </div>
+            </div>
+        </section>
+
+        <section class="about-hero">
+            <h1>About Us</h1>
+            <p>
+                Poké Stocks is where Pokémon cards become the stock market of nostalgia — we track them like shares,
+                analyze their growth, and help you make informed bets in the collectible card market.
+            </p>
+        </section>
+
+        <section class="about-content">
+            <h2>Our Mission</h2>
+            <p>
+                We believe Pokémon cards are more than just playthings — they’re alternative assets that have
+                consistently outperformed traditional markets. Our goal is to bring data, transparency, and tools
+                so fans, collectors, and investors can navigate this world with confidence.
+            </p>
+
+            <h2>Our Story</h2>
+            <p>
+                We launched in 2024 after seeing the same stories: people discovering that rare cards from childhood
+                were now worth exponentially more. Data shows that since 2004, Pokémon cards have delivered
+                ~3,800% growth, drastically outpacing benchmarks like the S&P 500. We built this site to be
+                the reliable source for daily price tracking, historical trends, and insights that feel more like
+                a stock platform than a hobby site.
+            </p>
+
+            <h2>The Team</h2>
+            <p>
+                We’re collectors turned analysts — people who spent hours trading cards and now spend hours crunching
+                numbers. We understand rarity, condition, sealed status, and market psychology. And yes — we also
+                love pulling cards from booster packs.
+            </p>
+
+            <h2>Why Poké Stocks?</h2>
+            <p>
+                Unlike generic price trackers, we treat Pokémon like a financial asset: daily prices, weekly averages,
+                sealed product valuations, historical trends. If you want the price of that 1st edition Charizard
+                or sealed box, or want to compare your portfolio to the stock market — Poké Stocks bridges that gap.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Poké Stocks. All rights reserved.</p>
+        <p class="disclaimer">
+            Pokémon and all related names, images, and brands are the property of The Pokémon Company, Nintendo,
+            Game Freak, and Creatures Inc. This website is an independent project and makes no claim of ownership
+            over any Pokémon intellectual property. All product names, logos, and images are used for informational
+            purposes only.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

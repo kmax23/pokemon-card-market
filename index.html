@@ -3,20 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Poké Stocks</title>
+    <title>Home | Poké Stocks</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabaseUrl = "https://qptdfdlkrifcombblzaw.supabase.co";
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwdGRmZGxrcmlmY29tYmJsemF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwOTA1NTEsImV4cCI6MjA3MjY2NjU1MX0.uEasItbNGXXNwl5bb_8YHYgaUkh9rUC9chfisMaaA-o";
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5524633691531456"
-        crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <!-- HEAD: quick-theme detection (place BEFORE your stylesheet link) -->
+    <!-- HEAD: quick-theme detection -->
     <script>
         (function () {
             try {
@@ -24,36 +17,49 @@
                 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const isDark = saved ? (saved === 'dark') : prefersDark;
                 if (isDark) document.documentElement.classList.add('dark');
-            } catch (e) {
-                // ignore (e.g. privacy mode)
-            }
+            } catch (e) { }
         })();
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5524633691531456"
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="style.css">
     <meta name='impact-site-verification' value='6e1b4ff6-9dda-4113-aa8a-dac77a4533b6'>
+    <meta name="description"
+        content="Poké Stocks tracks Pokémon card prices like the stock market, offering historical trends and insights.">
 </head>
 
 <body>
     <!-- NAVBAR -->
     <header id="navbar">
         <div class="container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div id="logo">
                 <h1>Poké Stocks</h1>
             </div>
             <nav>
                 <ul>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="cards.html">Cards</a></li>
                     <li><a href="sets.html">Sets</a></li>
                     <li><a href="sealed.html">Sealed Products</a></li>
+                    <li><a href="about.html">About</a></li>
                 </ul>
             </nav>
-            <!-- Dark/Light toggle-->
-            <button id="themeToggle">Dark</button>
-            <!-- Search bar -->
-            <div id="navbarSearch">
-                <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
-                <button id="searchBtn">Search</button>
+            <div id="navbarSearchWrapper">
+                <!-- Dark/Light Toggle Switch -->
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <div id="navbarSearch">
+                    <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
+                    <button id="searchBtn">Search</button>
+                </div>
             </div>
         </div>
     </header>
@@ -62,9 +68,7 @@
         <!-- STOCK TICKER -->
         <section id="topMoversTicker">
             <div class="ticker-wrapper">
-                <div id="tickerContent">
-                    <!-- JS will populate with top movers -->
-                </div>
+                <div id="tickerContent"></div>
             </div>
         </section>
 
@@ -83,6 +87,17 @@
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Poké Stocks. All rights reserved.</p>
+        <p class="disclaimer">
+            Pokémon and all related names, images, and brands are the property of The Pokémon Company, Nintendo,
+            Game Freak, and Creatures Inc. This website is an independent project and makes no claim of ownership
+            over any Pokémon intellectual property. All product names, logos, and images are used for informational
+            purposes only.
+        </p>
+    </footer>
 
     <script src="script.js"></script>
 </body>

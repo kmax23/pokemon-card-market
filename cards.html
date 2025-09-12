@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon Cards | Poké Stocks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5524633691531456"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- HEAD: quick-theme detection (place BEFORE your stylesheet link) -->
+    <script>
+        (function () {
+            try {
+                const saved = localStorage.getItem('theme'); // "dark" or "light"
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const isDark = saved ? (saved === 'dark') : prefersDark;
+                if (isDark) document.documentElement.classList.add('dark');
+            } catch (e) {
+                // ignore (e.g. privacy mode)
+            }
+        })();
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <meta name='impact-site-verification' value='6e1b4ff6-9dda-4113-aa8a-dac77a4533b6'>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="container">
+            <div id="logo">
+                <h1>Poké Stocks</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cards.html">Cards</a></li>
+                    <li><a href="sets.html">Sets</a></li>
+                    <li><a href="sealed.html">Sealed Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div id="navbarSearchWrapper">
+                <!-- Dark/Light Toggle Switch -->
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <!-- Search bar -->
+                <div id="navbarSearch">
+                    <input type="text" id="navbarSearchInput" placeholder="Search cards or sets...">
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- STOCK TICKER -->
+        <section id="topMoversTicker">
+            <div class="ticker-wrapper">
+                <div id="tickerContent">
+                    <!-- JS will populate with top movers -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TOP GAINERS & LOSERS -->
+        <section id="topMovers">
+            <h2>Top 10 Daily Gainers & Losers</h2>
+            <div class="top-movers-grid">
+                <div>
+                    <h3>Top Gainers</h3>
+                    <ul id="topGainers"></ul>
+                </div>
+                <div>
+                    <h3>Top Losers</h3>
+                    <ul id="topLosers"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEARCH & FILTERS -->
+        <section id="cardFilters">
+            <h2>Search & Filters</h2>
+            <input type="text" id="searchName" placeholder="Card Name">
+            <select id="filterSet">
+                <option value="">All Sets</option>
+            </select>
+            <select id="filterRarity">
+                <option value="">All Rarities</option>
+            </select>
+            <button id="filterBtn">Apply Filters</button>
+        </section>
+
+        <!-- CARDS TABLE -->
+        <section id="cardsTableSection">
+            <table id="cardTable">
+                <thead>
+                    <tr>
+                        <th>Card Name</th>
+                        <th>Set</th>
+                        <th>Rarity</th>
+                        <th>Latest Price</th>
+                        <th>Daily % Change</th>
+                        <th>Price Trend</th>
+                    </tr>
+                </thead>
+                <tbody id="cardTableBody"></tbody>
+            </table>
+            <div id="pagination">
+                <button id="prevPage">Previous</button>
+                <span id="pageInfo"></span>
+                <button id="nextPage">Next</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Poké Stocks. All rights reserved.</p>
+        <p class="disclaimer">
+            Pokémon and all related names, images, and brands are the property of The Pokémon Company, Nintendo,
+            Game Freak, and Creatures Inc. This website is an independent project and makes no claim of ownership
+            over any Pokémon intellectual property. All product names, logos, and images are used for informational
+            purposes only.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

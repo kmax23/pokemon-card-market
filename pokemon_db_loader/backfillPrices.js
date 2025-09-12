@@ -203,11 +203,11 @@ async function processDate(date) {
             const row = {
                 date: dateStr,
                 granularity: "daily",
-                low_price: p.lowPrice ?? null,
-                mid_price: p.midPrice ?? null,
-                high_price: p.highPrice ?? null,
-                market_price: p.marketPrice ?? null,
-                avg_price: p.marketPrice ?? p.midPrice ?? null,
+                low_price: p.lowPrice ?? p.low_price ?? null,
+                mid_price: p.midPrice ?? p.mid_price ?? null,
+                high_price: p.highPrice ?? p.high_price ?? null,
+                market_price: p.marketPrice ?? p.market_price ?? null,
+                avg_price: p.marketPrice ?? p.market_price ?? p.midPrice ?? p.mid_price ?? null,
             };
 
             if (type === "card") cardRows.push({ ...row, card_id: p.productId });
@@ -228,15 +228,23 @@ async function processDate(date) {
 
     // Insert into Supabase
     if (finalCardRows.length) {
-        const { error } = await supabase.from("daily_card_prices").upsert(finalCardRows, { onConflict: "card_id,date"});
-        if (error) console.error(`❌ Error inserting cards ${dateStr}:`, error.message);
-        else console.log(`✅ Inserted ${data?.length || finalCardRows.length} card rows`);
+        const BATCH_SIZE = 5000;
+        for (let i = 0; i < finalCardRows.length; i += BATCH_SIZE) {
+            const batch = finalCardRows.slice(i, i + BATCH_SIZE);
+            const { error } = await supabase.from("daily_card_prices").upsert(batch, { onConflict: "card_id,date,granularity" });
+            if (error) console.error(`❌ Error inserting cards ${dateStr}:`, error.message);
+            else console.log(`✅ Inserted ${finalCardRows.length} card rows`);
+        }
     }
 
     if (finalSealedRows.length) {
-        const { error } = await supabase.from("daily_sealed_prices").upsert(finalSealedRows, { onConflict: "sealed_product_id,date"});
-        if (error) console.error(`❌ Error inserting sealed ${dateStr}:`, error.message);
-        else console.log(`✅ Inserted ${data?.length || finalSealedRows.length} sealed rows`);
+        const BATCH_SIZE = 5000;
+        for (let i = 0; i < finalSealedRows.length; i += BATCH_SIZE) {
+            const batch = finalSealedRows.slice(i, i + BATCH_SIZE);
+            const { error } = await supabase.from("daily_sealed_prices").upsert(batch, { onConflict: "sealed_product_id,date,granularity" });
+            if (error) console.error(`❌ Error inserting sealed ${dateStr}:`, error.message);
+            else console.log(`✅ Inserted ${finalSealedRows.length} sealed rows`);
+        }
     }
 }
 
@@ -255,8 +263,9 @@ function aggregateWeekly(rows, idField) {
     for (const [weekStart, products] of Object.entries(byWeek)) {
         for (const [id, rows] of Object.entries(products)) {
             const avg = (field) => {
-                rows.map(r => r[field]).filter(v => v !== null).reduce((a, b) => a + b, 0) /
-                rows.map(r => r[field]).filter(v => v !== null).length || null;
+                const values = rows.map(r => r[field]).filter(v => v !== null);
+                if (!values.length) return null;
+                return values.reduce((a, b) => a + b, 0) / values.length;
             };
             const obj = { date: weekStart, granularity: "weekly", ...Object.fromEntries([[idField, Number(id)]]), low_price: avg("low_price"), mid_price: avg("mid_price"), high_price: avg("high_price"), market_price: avg("market_price"), avg_price: avg("avg_price") };
             result.push(obj);

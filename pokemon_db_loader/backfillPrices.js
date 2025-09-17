@@ -8,7 +8,7 @@ import { unpack } from "7zip-min";
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
-const START_DATE = new Date("2024-02-08");
+const START_DATE = new Date("2025-08-01");
 const END_DATE = new Date(); // today
 
 let validSetIds = new Set();
@@ -217,12 +217,21 @@ async function processDate(date) {
 
     console.log(`   ↳ Prepared ${cardRows.length} card rows, ${sealedRows.length} sealed rows`);
 
+    const uniqueMap = new Map();
+    cardRows.forEach(row => {
+        const key = `${row.card_id}-${row.date}`;
+        if (!uniqueMap.has(key)) {
+            uniqueMap.set(key, row);
+        }
+    });
+    const uniqueCardRows = Array.from(uniqueMap.values());
+
     // Weekly aggregation if needed
-    let finalCardRows = cardRows;
+    let finalCardRows = uniqueCardRows;
     let finalSealedRows = sealedRows;
 
     if (!shouldStoreDaily(date)) {
-        finalCardRows = aggregateWeekly(cardRows, "card_id");
+        finalCardRows = aggregateWeekly(uniqueCardRowsardRows, "card_id");
         finalSealedRows = aggregateWeekly(sealedRows, "sealed_product_id");
     }
 

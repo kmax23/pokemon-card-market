@@ -1,3 +1,46 @@
+/* THEME VARIABLES (light defaults) */
+:root {
+  --bg: #FAFAFA;
+  --text: #222;
+  --nav-bg: #FFCB05;
+  --nav-text: #222;
+  --accent: #3B4CCA;
+  /* link / logo */
+  --positive: #4DB6AC;
+  --negative: #FF1C1C;
+  --card-bg: #fff;
+  --card-hover: #FFEE58;
+  --footer-bg: #111;
+  --footer-text: #fff;
+  --muted: #777;
+  --chart-fill: rgba(59, 76, 202, 0.12);
+}
+
+/* DARK THEME OVERRIDES */
+html.dark {
+  --bg: #0b0b0b;
+  --text: #e9ecef;
+  --nav-bg: #0e0e10;
+  --nav-text: #FFD700;
+  --accent: #9be7d1;
+  --positive: #4DB6AC;
+  --negative: #FF5252;
+  --card-bg: #121212;
+  --card-hover: #3a3a3a;
+  --footer-bg: #0b0b0b;
+  --footer-text: #eaeaea;
+  --muted: #999;
+  --chart-fill: rgba(59, 76, 202, 0.18);
+}
+
+/* Apply to base elements */
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+
 /* ===================== */
 /* BASE STYLES */
 /* ===================== */
@@ -39,8 +82,8 @@ h4 {
 footer {
   text-align: center;
   padding: 20px;
-  background-color: var(--footer-bg, #111);
-  color: var(--footer-text, #fff);
+  background: var(--footer-bg);
+  color: var(--footer-text);
 }
 
 footer .disclaimer {
@@ -57,8 +100,8 @@ footer .disclaimer {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #FFCB05;
-  color: #222;
+  background: var(--nav-bg);
+  color: var(--nav-text);
   padding: 15px 30px;
 }
 
@@ -72,7 +115,7 @@ footer .disclaimer {
 
 #logo h1 {
   font-size: 1.6rem;
-  color: #3B4CCA;
+  color: var(--accent);
 }
 
 #navbar nav {
@@ -89,7 +132,7 @@ footer .disclaimer {
 }
 
 #navbar nav ul li a {
-  color: #3B4CCA;
+  color: var(--accent);
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -172,17 +215,17 @@ footer .disclaimer {
 #topMoversTicker {
   overflow: hidden;
   white-space: nowrap;
-  background-color: #FFCB05;
-  color: #222;
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
   padding: 12px 0;
-  border-top: 2px solid #3B4CCA;
-  border-bottom: 2px solid #3B4CCA;
 }
 
 #tickerContent {
   display: inline-block;
   padding-left: 100%;
-  animation: tickerMove 25s linear infinite;
+  animation: tickerMove 60s linear infinite;
 }
 
 #tickerContent:hover {
@@ -272,7 +315,7 @@ footer .disclaimer {
   border-collapse: collapse;
   border-radius: 8px;
   overflow: hidden;
-  background: #fff;
+  background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -285,7 +328,7 @@ footer .disclaimer {
 }
 
 #cardTable tr:hover {
-  background-color: #FFEE58;
+  background-color: var(--card-hover);
   cursor: pointer;
 }
 

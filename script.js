@@ -64,6 +64,36 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------
+// Fetch data from card_prices and sealed_prices views
+// -------------------------
+async function fetchPrices() {
+    const { data, error } = await supabaseClient
+        .from("daily_index_prices")
+        .select("date, total_price")
+        .order("date", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching daily_index_prices:", error);
+        return [];
+    }
+
+    return data.map(row => ({
+        date: row.date,
+        total: row.total_price
+    }));
+}
+
+async function testFetch() {
+    const { data, error } = await supabaseClient
+        .from("daily_index_prices")
+        .select("*")
+        .limit(5);
+    console.log({ data, error });
+}
+testFetch();
+
+
+// -------------------------
 // 2. COLORS
 // -------------------------
 const colors = {
@@ -301,41 +331,82 @@ function populateTicker() {
 // 10. INDEX CHART
 // -------------------------
 async function renderCardIndexChart() {
-    try {
-        const { data } = await supabaseClient.from("daily_card_prices").select("date, market_price");
-        if (!data || data.length === 0) return;
+    const data = await fetchPrices();
+    const ctx = document.getElementById("indexChart").getContext("2d");
 
-        const ctx = document.getElementById("indexChart");
-        if (!ctx) return;
+    // Prepare dataset for progressive animation
+    const chartData = data.map(d => d.total);
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: data.map(d => d.date),
-                datasets: [{
-                    label: "Pokémon Card Index",
-                    data: data.map(d => d.market_price),
-                    borderColor: colors.pikachuYellow,
-                    backgroundColor: colors.electricHover,
-                    fill: true,
-                    tension: 0.2,
-                    borderWidth: 3,
-                    pointBackgroundColor: colors.pikachuYellow,
-                    pointRadius: 4
-                }]
+    // Animation configuration
+    const totalDuration = 10000;
+    const delayBetweenPoints = totalDuration / chartData.length;
+    const previousY = (ctx) =>
+        ctx.index === 0
+            ? ctx.chart.scales.y.getPixelForValue(100)
+            : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+
+    const animation = {
+        x: {
+            type: 'number',
+            easing: 'linear',
+            duration: delayBetweenPoints,
+            from: NaN,
+            delay(ctx) {
+                if (ctx.type !== 'data' || ctx.xStarted) return 0;
+                ctx.xStarted = true;
+                return ctx.index * delayBetweenPoints;
+            }
+        },
+        y: {
+            type: 'number',
+            easing: 'linear',
+            duration: delayBetweenPoints,
+            from: previousY,
+            delay(ctx) {
+                if (ctx.type !== 'data' || ctx.yStarted) return 0;
+                ctx.yStarted = true;
+                return ctx.index * delayBetweenPoints;
+            }
+        }
+    };
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: data.map(d => d.date),
+            datasets: [{
+                label: "Pokémon Market Index",
+                data: chartData,
+                borderColor: colors.bulbasaurTeal,
+                backgroundColor: colors.electricHover,
+                fill: true,
+                tension: 0.2,
+                radius: 0
+            }]
+        },
+        options: {
+            animation,
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    mode: "index",
+                    intersect: false,
+                },
+                legend: {
+                    display: true
+                }
             },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: true }, tooltip: { mode: 'index', intersect: false } },
-                scales: {
-                    x: { ticks: { color: colors.pokeballBlue } },
-                    y: { ticks: { color: colors.pokeballBlue } }
+            scales: {
+                x: {
+                    title: { display: true, text: "Date" },
+                },
+                y: {
+                    title: { display: true, text: "Total Price (USD)" },
+                    beginAtZero: false
                 }
             }
-        });
-    } catch (err) {
-        console.error("Error rendering index chart:", err);
-    }
+        }
+    });
 }
 
 // -------------------------
@@ -485,6 +556,9 @@ function displaySealed(sealedData) {
 // INIT
 // -------------------------
 document.addEventListener("DOMContentLoaded", () => {
+    if (document.body.contains(document.getElementById("indexChart"))) {
+        renderCardIndexChart();
+    }
     if (document.body.contains(document.getElementById("cardTableBody"))) {
         loadCards();
     } else if (document.body.contains(document.getElementById("setsTableBody"))) {

@@ -1,7 +1,8 @@
 // script.js
 
-// THEME TOGGLE — place near the top of script.js (or in its own small module)
-// Immediately run so theme is correct before UI paints
+// -------------------------
+// THEME TOGGLE
+// -------------------------
 (function () {
     const KEY = "theme";
     const checkbox = document.getElementById("themeToggle");
@@ -68,30 +69,85 @@ const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 // -------------------------
 async function fetchPrices() {
     const { data, error } = await supabaseClient
-        .from("daily_index_prices")
+        .from("daily_index_prices_mv")
         .select("date, total_price")
         .order("date", { ascending: true });
 
     if (error) {
-        console.error("Error fetching daily_index_prices:", error);
-        return [];
+        console.error("Error fetching daily_index_prices_mv:", error);
+        return { prices: [], lastUpdated: null };
     }
 
-    return data.map(row => ({
+    const prices = data.map(row => ({
         date: row.date,
         total: row.total_price
     }));
+
+    const lastUpdated = prices.length ? prices[prices.length - 1].date : null;
+
+    console.log("Last Updated:", lastUpdated);
+
+    return { prices, lastUpdated };
 }
 
-async function testFetch() {
+async function fetchCardHistory(cardId) {
     const { data, error } = await supabaseClient
-        .from("daily_index_prices")
-        .select("*")
-        .limit(5);
-    console.log({ data, error });
-}
-testFetch();
+        .from("card_prices")
+        .select("date, market_price")
+        .eq("card_id", cardId)
+        .order("date", { ascending: true })
+        .limit(90);
 
+    if (error) {
+        console.error(`Error fetching history for card ${cardId}:`, error);
+        return [];
+    }
+
+    return data;
+}
+
+async function fetchTopMoversData() {
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+    const ninetyDaysAgoISO = ninetyDaysAgo.toISOString();
+
+    const { data, error } = await supabaseClient
+        .from("card_prices")
+        .select("card_id, card_name, set_name, rarity, market_price, date")
+        .order("date", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching top movers data:", error);
+        return [];
+    }
+
+    const cardsMap = {};
+    data.forEach(row => {
+        if (!cardsMap[row.card_id]) cardsMap[row.card_id] = [];
+        cardsMap[row.card_id].push(row);
+    });
+
+    const topMoversData = Object.values(cardsMap).map(prices => {
+        const latest = prices[prices.length - 1];
+        const pastPrice = prices.find(p => new Date(p.date) <= ninetyDaysAgoISO) || prices[0];
+
+        const pctChange = pastPrice.market_price
+            ? ((latest.market_price - pastPrice.market_price) / pastPrice.market_price) * 100
+            : 0;
+
+        return {
+            card_id: latest.card_id,
+            card_name: latest.card_name,
+            set_name: latest.set_name,
+            rarity: latest.rarity,
+            latest_price: latest.market_price,
+            past_price: pastPrice.market_price,
+            pctChange
+        };
+    });
+
+    return topMoversData;
+}
 
 // -------------------------
 // 2. COLORS
@@ -113,91 +169,103 @@ const pageSize = 50;
 let hoverChartInstance = null;
 
 // -------------------------
-// 5. FETCH CARDS (optimized)
+// LOAD ALL CARDS (with last 90 days)
 // -------------------------
-async function loadCards() {
-    try {
+function populateRarities() {
+    const raritySelect = document.getElementById("filterRarity");
+    if (!raritySelect || !cardsData.length) return;
+
+    const rarities = [...new Set(cardsData.map(c => c.rarity).filter(Boolean))].sort();
+
+    raritySelect.innerHTML = '<option value="">All</option>';
+
+    rarities.forEach(r => {
+        const option = document.createElement("option");
+        option.value = r.toLowerCase().trim();
+        option.textContent = r;
+        raritySelect.appendChild(option);
+    })
+}
+
+function populateSets() {
+    const setSelect = document.getElementById("filterSet");
+    if (!setSelect || !cardsData.length) return;
+
+    const sets = [...new Set(cardsData.map(c => c.set_name).filter(Boolean))].sort((a, b) =>
+        a.localeCompare(b, undefined, { sensitivity: "base" })
+    );
+
+    setSelect.innerHTML = '<option value="">All</option>';
+
+    sets.forEach(s => {
+        const option = document.createElement("option");
+        option.value = s.toLowerCase().trim();
+        option.textContent = s;
+        setSelect.appendChild(option);
+    });
+}
+
+async function loadAllCards() {
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+    const ninetyDaysAgoISO = ninetyDaysAgo.toISOString();
+
+    let allRows = [];
+    let from = 0;
+    const batchSize = 10000;
+
+    while (true) {
         const { data, error } = await supabaseClient
             .from("card_prices")
             .select("card_id, card_name, set_name, rarity, market_price, date")
-            .order("date", { ascending: true });
+            .order("date", { ascending: true })
+            .gte("date", ninetyDaysAgoISO)
+            .range(from, from + batchSize - 1);
 
-        if (error) throw error;
-        if (!data || data.length === 0) return;
+        if (error) {
+            console.error("Error loading card prices:", error);
+            break;
+        }
+        if (!data || data.length === 0) break;
 
-        // Group by card_id
-        const grouped = {};
-        data.forEach(d => {
-            const id = d.card_id ?? d.card_id?.toString();
-            if (!grouped[id]) grouped[id] = [];
-            grouped[id].push({
-                date: d.date,
-                market_price: parseFloat(d.market_price ?? 0)
-            });
-        });
-
-        cardsData = Object.values(
-            data.reduce((acc, row) => {
-                if (!acc[row.card_id]) {
-                    acc[row.card_id] = {
-                        card_id: row.card_id,
-                        card_name: row.card_name,
-                        set_name: row.set_name,
-                        rarity: row.rarity,
-                        prices: []
-                    };
-                }
-                acc[row.card_id].prices.push({
-                    date: row.date,
-                    market_price: parseFloat(row.market_price)
-                });
-                return acc;
-            }, {})
-        ).map(c => {
-            // Sort prices ascending
-            c.prices.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            const latest = c.prices[c.prices.length - 1];
-
-            // Find the previous price from a different day than latest
-            const previous = c.prices
-                .slice(0, -1)               // exclude latest
-                .reverse()                   // start from most recent
-                .find(p => new Date(p.date).toDateString() !== new Date(latest.date).toDateString())
-                || null;
-
-            // Compute daily % change
-            const pctChange = previous
-                ? ((latest.market_price - previous.market_price) / previous.market_price) * 100
-                : null;
-
-            return {
-                ...c,
-                latest,
-                previous,
-                pctChange
-            };
-        });
-
-
-        displayTopMovers();
-        displayCards();
-        populateTicker();
-        renderCardIndexChart();
-    } catch (err) {
-        console.error("Error loading cards:", err);
+        allRows = allRows.concat(data);
+        from += data.length;
+        if (data.length < batchSize) break;
     }
+
+    const cardsMap = {};
+    allRows.forEach(row => {
+        if (!cardsMap[row.card_id]) cardsMap[row.card_id] = [];
+        cardsMap[row.card_id].push(row);
+    });
+
+    cardsData = Object.values(cardsMap).map(prices => {
+        const sortedPrices = prices.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const latest = sortedPrices[sortedPrices.length - 1];
+        const pastPrice = sortedPrices.find(p => new Date(p.date) <= ninetyDaysAgoISO) || sortedPrices[0];
+
+        const pctChange = pastPrice.market_price
+            ? ((latest.market_price - pastPrice.market_price) / pastPrice.market_price) * 100
+            : 0;
+
+        return {
+            card_id: latest.card_id,
+            card_name: latest.card_name,
+            set_name: latest.set_name,
+            rarity: latest.rarity,
+            latest_price: latest.market_price,
+            past_price: pastPrice.market_price,
+            pctChange,
+            history: sortedPrices
+        };
+    });
 }
 
 // -------------------------
-// 6. TOP GAINERS & LOSERS
+// DISPLAY TOP GAINERS / LOSERS
 // -------------------------
 function displayTopMovers() {
-    const sorted = cardsData
-        .filter(c => c.previous)
-        .map(c => ({ ...c, pctChange: ((c.latest.market_price - c.previous.market_price) / c.previous.market_price) * 100 }))
-        .sort((a, b) => b.pctChange - a.pctChange);
-
+    const sorted = [...cardsData].sort((a, b) => b.pctChange - a.pctChange);
     const gainers = sorted.slice(0, 10);
     const losers = sorted.slice(-10).reverse();
 
@@ -210,70 +278,99 @@ function displayTopMovers() {
 
     gainers.forEach(c => {
         const li = document.createElement("li");
-        li.textContent = `${c.card.name} (+${c.pctChange.toFixed(2)}%)`;
+        li.textContent = `${c.card_name} (+${c.pctChange.toFixed(2)}%)`;
         gainersEl.appendChild(li);
     });
 
     losers.forEach(c => {
         const li = document.createElement("li");
-        li.textContent = `${c.card.name} (${c.pctChange.toFixed(2)}%)`;
+        li.textContent = `${c.card_name} (${c.pctChange.toFixed(2)}%)`;
         losersEl.appendChild(li);
     });
 }
+
+// -------------------------
+// DISPLAY CARDS TABLE
+// -------------------------
+let filteredCards = [];
+
+function applyFilters() {
+    const searchValue = document.getElementById("searchName")?.value.toLowerCase().trim() || "";
+    const setValue = (document.getElementById("filterSet")?.value || "").toLowerCase().trim();
+    const rarityValue = (document.getElementById("filterRarity")?.value || "").toLowerCase().trim();
+
+    filteredCards = cardsData.filter(c => {
+        const matchesName = c.card_name.toLowerCase().includes(searchValue);
+        const matchesRarity = rarityValue ? (c.rarity || "").toLowerCase().trim() === rarityValue : true;
+        const matchesSet = setValue ? (c.set_name || "").toLowerCase().trim() === setValue : true;
+        return matchesName && matchesRarity && matchesSet;
+    });
+
+    currentPage = 1;
+    displayCards();
+}
+
+document.getElementById("searchName")?.addEventListener("input", applyFilters);
+document.getElementById("filterSet")?.addEventListener("change", applyFilters);
+document.getElementById("filterRarity")?.addEventListener("change", applyFilters);
 
 function displayCards() {
     const tbody = document.getElementById("cardTableBody");
     if (!tbody) return;
     tbody.innerHTML = "";
 
+    const dataToShow = filteredCards.length ? filteredCards : cardsData;
     const start = (currentPage - 1) * pageSize;
     const end = start + pageSize;
-    const pageData = cardsData.slice(start, end);
+    const pageData = dataToShow.slice(start, end);
 
     pageData.forEach(c => {
-        // Ensure latest and previous exist
-        const latest = c.prices[c.prices.length - 1];
-        const previous = c.prices.length > 1 ? c.prices[c.prices.length - 2] : latest;
-
-        const pctChange = previous.market_price
-            ? ((latest.market_price - previous.market_price) / previous.market_price) * 100
-            : 0;
+        const pctChange = c.pctChange ?? 0;
+        const pctChangeFormatted = pctChange.toFixed(2) + "%";
+        const changeColor = pctChange >= 0 ? "green" : "red";
 
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${c.card_name}</td>
             <td>${c.set_name || "-"}</td>
             <td>${c.rarity || "-"}</td>
-            <td>$${c.latest.market_price.toFixed(2)}</td>
-            <td>${c.pctChange !== null ? c.pctChange.toFixed(2) + "%" : "—"}</td>
-            <td><canvas id="spark-${c.card_id}" width="100" height="30"></canvas></td>
+            <td>$${c.latest_price.toFixed(2)}</td>
+            <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}%</td>
+            <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>
         `;
+
         tbody.appendChild(tr);
 
-        const ctx = document.getElementById(`spark-${c.card_id}`).getContext("2d");
-        new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: c.prices.map(p => p.date),
-                datasets: [{
-                    data: c.prices.map(p => p.market_price),
-                    borderColor: colors.pokeballBlue,
-                    backgroundColor: "rgba(59,76,202,0.2)",
-                    tension: 0.3,
-                    pointRadius: 0
-                }]
-            },
-            options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
-        });
+        if (c.history && c.history.length >= 2) {
+            const ctx = document.getElementById(`spark-${c.card_id}`).getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: c.history.map(h => h.date),
+                    datasets: [{
+                        data: c.history.map(h => parseFloat(h.market_price)),
+                        borderColor: colors.pokeballBlue,
+                        backgroundColor: "rgba(59,76,202,0.2)",
+                        tension: 0.3,
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { display: false } }
+                }
+            });
+        }
     });
 
     const pageInfo = document.getElementById("pageInfo");
-    if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(cardsData.length / pageSize)}`;
+    if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(dataToShow.length / pageSize)}`;
 }
 
-
 // -------------------------
-// 8. PAGINATION
+// PAGINATION
 // -------------------------
 document.getElementById("prevPage")?.addEventListener("click", () => {
     if (currentPage > 1) { currentPage--; displayCards(); }
@@ -283,63 +380,44 @@ document.getElementById("nextPage")?.addEventListener("click", () => {
 });
 
 // -------------------------
-// 9. TICKER (optimized)
+// TICKER (uses 90-day pctChange)
 // -------------------------
 function populateTicker() {
-    try {
-        const ticker = document.getElementById("tickerContent");
-        if (!ticker) return;
-        ticker.innerHTML = "";
+    const ticker = document.getElementById("tickerContent");
+    if (!ticker) return;
+    ticker.innerHTML = "";
 
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() - 30);
-        targetDate.setHours(0, 0, 0, 0);
+    const topCards = cardsData
+        .sort((a, b) => Math.abs(b.pctChange) - Math.abs(a.pctChange))
+        .slice(0, 50);
 
-        const topCards = cardsData
-            .map(c => {
-                const prevPrice = c.prices
-                    .filter(p => new Date(p.date) <= targetDate)
-                    .sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-
-                if (!prevPrice || prevPrice.market_price === 0) return null;
-
-                const pctChange = ((c.latest.market_price - prevPrice.market_price) / prevPrice.market_price) * 100;
-
-                return {
-                    name: c.card_name,
-                    pctChange
-                };
-            })
-            .filter(Boolean)
-            .sort((a, b) => b.pctChange - a.pctChange)
-            .slice(0, 50);
-
-        // Render ticker
-        ticker.innerHTML = "";
-        topCards.forEach(c => {
-            const span = document.createElement("span");
-            span.className = "tickerItem " + (c.pctChange >= 0 ? "positive" : "negative");
-            span.textContent = `${c.card_name}: ${c.previous ? ((c.latest.market_price - c.previous.market_price) / c.previous.market_price * 100).toFixed(2) + "%" : "—"}`;
-            ticker.appendChild(span);
-        });
-    } catch (err) {
-        console.error("Error populating ticker:", err);
-    }
+    topCards.forEach(c => {
+        const span = document.createElement("span");
+        span.className = "tickerItem " + (c.pctChange >= 0 ? "positive" : "negative");
+        span.textContent = `${c.card_name}: ${c.pctChange.toFixed(2)}%`;
+        ticker.appendChild(span);
+    });
 }
 
 // -------------------------
 // 10. INDEX CHART
 // -------------------------
+let indexChartInstance;
+
 async function renderCardIndexChart() {
-    const data = await fetchPrices();
+    const { prices, lastUpdated } = await fetchPrices();
     const ctx = document.getElementById("indexChart").getContext("2d");
 
+    if (indexChartInstance) {
+        indexChartInstance.destroy();
+    }
+
     // Prepare dataset for progressive animation
-    const chartData = data.map(d => d.total);
+    const chartData = prices.map(d => d.total);
 
     // Animation configuration
     const totalDuration = 10000;
-    const delayBetweenPoints = totalDuration / chartData.length;
+    const delayBetweenPoints = chartData.length ? totalDuration / chartData.length : 0;
     const previousY = (ctx) =>
         ctx.index === 0
             ? ctx.chart.scales.y.getPixelForValue(100)
@@ -370,10 +448,26 @@ async function renderCardIndexChart() {
         }
     };
 
-    new Chart(ctx, {
+    const lastUpdatedPlugin = {
+        id: 'lastUpdatedPlugin',
+        afterDraw: (chart) => {
+            if (!lastUpdated) return;
+            const { ctx, chartArea } = chart;
+            ctx.save();
+            ctx.fillStyle = colors.charizardRed; // or any color you want
+            ctx.font = 'bold 12px Fredoka One, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'top';
+            const text = `Last Updated: ${new Date(lastUpdated).toLocaleString()}`;
+            ctx.fillText(text, chartArea.right, chartArea.top - 10); // slightly above chart area
+            ctx.restore();
+        }
+    };
+
+    indexChartInstance = new Chart(ctx, {
         type: "line",
         data: {
-            labels: data.map(d => d.date),
+            labels: prices.map(d => d.date),
             datasets: [{
                 label: "Pokémon Market Index",
                 data: chartData,
@@ -405,7 +499,8 @@ async function renderCardIndexChart() {
                     beginAtZero: false
                 }
             }
-        }
+        },
+        plugins: [lastUpdatedPlugin]
     });
 }
 
@@ -555,20 +650,21 @@ function displaySealed(sealedData) {
 // -------------------------
 // INIT
 // -------------------------
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.body.contains(document.getElementById("indexChart"))) {
-        renderCardIndexChart();
-    }
+document.addEventListener("DOMContentLoaded", async () => {
     if (document.body.contains(document.getElementById("cardTableBody"))) {
-        loadCards();
-    } else if (document.body.contains(document.getElementById("setsTableBody"))) {
-        loadSets();
-    } else if (document.body.contains(document.getElementById("sealedTableBody"))) {
-        loadSealed();
+        await loadAllCards();
+        populateRarities();
+        populateSets();
+
+        displayCards();
+        displayTopMovers();
+        populateTicker();
     }
 });
 
-// Mobile menu toggle
+// -------------------------
+// MOBILE MENU TOGGLE
+// -------------------------
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.querySelector("#navbar nav ul");
 

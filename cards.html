@@ -105,12 +105,16 @@
         <!-- SEARCH & FILTERS -->
         <section id="cardFilters">
             <h2>Search & Filters</h2>
-            <input type="text" id="searchName" placeholder="Card Name">
-            <select id="filterSet">
+            <input type="text" id="searchName" placeholder="Search by card name..." oninput="applyFilters()">
+            <select id="filterSet" onchange="applyFilters()">
                 <option value="">All Sets</option>
             </select>
-            <select id="filterRarity">
+            <select id="filterRarity" onchange="applyFilters()">
                 <option value="">All Rarities</option>
+                <option value="Common">Common</option>
+                <option value="Uncommon">Uncommon</option>
+                <option value="Rare">Rare</option>
+                <option value="Ultra Rare">Ultra Rare</option>
             </select>
             <button id="filterBtn">Apply Filters</button>
         </section>

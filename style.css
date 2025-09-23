@@ -310,14 +310,14 @@ footer .disclaimer {
   border-radius: 1rem;
   overflow: hidden;
   background: var(--card-bg, #fff);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   color: inherit;
 }
 
 .articleCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 .martech-card-hero img {
@@ -347,8 +347,8 @@ footer .disclaimer {
   padding: 0.75rem 1rem;
   font-size: 0.85rem;
   color: var(--text-muted, #888);
-  background: rgba(0,0,0,0.03);
-  border-top: 1px solid rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 #articlesGrid p {
@@ -362,18 +362,37 @@ footer .disclaimer {
 #cardTable {
   width: 100%;
   border-collapse: collapse;
-  border-radius: 8px;
   overflow: hidden;
   background: var(--card-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+#cardTable canvas {
+  height: 28px !important;
+  /* compact sparkline style */
+  width: 100px !important;
+  /* keep them narrow */
+  display: block;
+
+}
+
+#cardTable td canvas {
+  margin: 0;
+  padding: 0;
+}
+
 #cardTable th,
 #cardTable td {
-  padding: 12px;
+  padding: 2px 6px;
+  line-height: 1.1;
   border-bottom: 1px solid #ddd;
-  text-align: center;
+  text-align: left;
   transition: background 0.2s ease;
+}
+
+#cardTable th {
+  background-color: var(--table-header-bg, #f2f2f2);
+  text-align: left;
 }
 
 #cardTable tr:hover {
@@ -387,6 +406,10 @@ footer .disclaimer {
 
 #cardTable tbody td.negative {
   color: #FF1C1C;
+}
+
+#cardTable tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
 #cardChart {
@@ -449,6 +472,12 @@ html.dark #cardTable {
 
 html.dark #cardTable tr:hover {
   background-color: #FFD700;
+}
+
+html.dark #cardTable th {
+  background-color: #333;
+  color: #FFD700;
+  /* golden text */
 }
 
 html.dark #cardTable th,
@@ -550,5 +579,89 @@ html.dark #indexSection {
   #cardTable td {
     font-size: 0.85rem;
     padding: 8px;
+  }
+}
+
+.article-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.article-card__image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.article-card__content {
+  padding: 1rem;
+}
+
+.article-card__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.article-card__description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.article-card__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem 1rem;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.article-card__author,
+.article-card__date {
+  color: #999;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 equal columns */
+  gap: 1.5rem;
+  /* space between cards */
+  padding: 1rem;
+}
+
+/* Make it responsive */
+@media (max-width: 1200px) {
+  .articles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
   }
 }

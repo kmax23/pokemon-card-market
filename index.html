@@ -29,6 +29,10 @@
 </head>
 
 <body>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Fetching Pokémon data...this may take a minute or two</p>
+    </div>
     <!-- NAVBAR -->
     <header id="navbar">
         <div class="container">
@@ -81,21 +85,12 @@
         <!-- ARTICLES -->
         <section id="articles">
             <h2>Latest Articles from TCGplayer</h2>
-            <div class="articles-grid">
-                <!-- Article Card -->
-                <a href="https://www.tcgplayer.com/content/article/The-Biggest-Price-Spikes-in-Pok%C3%A9mon-this-Week-09-16-2025/db869d0f-2c4e-4f5b-bed5-f52cf5bd6ca0/" target="_blank" class="article-card">
-                    <div class="article-card__image">
-                        <img src="https://mktg-assets.tcgplayer.com/fit-in/750x4000/filters:quality(75)/content/pokemon/_2025/SEP/16/Pokemon-Spikes-September-16-2025-Opengraph.jpg" alt="The Biggest Price Spikes in Pokémon this Week - 09/16/2025">
-                    </div>
-                    <div class="article-card__content">
-                        <h3 class="article-card__title">The Biggest Price Spikes in Pokémon this Week - 09/16/2025</h3>
-                        <p class="article-card__description">Moonbreon has officially broken $2,000.00!</p>
-                    </div>
-                    <div class="article-card__footer">
-                        <span class="article-card__author">By Corbin Hosler</span>
-                        <span class="article-card__date">Sept 16, 2025</span>
-                    </div>
-                </a>
+            <div class="articles-grid"></div>
+
+            <div class="pagination">
+                <button id="prev">Previous</button>
+                <span>Page <span id="page-number">1</span></span>
+                <button id="next">Next</button>
             </div>
         </section>
     </main>

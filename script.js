@@ -65,6 +65,77 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // -------------------------
+// Fetch TCGplayer articles for home page
+// -------------------------
+function loadArticles() {
+    let currentArticlePage = 1;
+    const articlesPerPage = 24;
+
+    const grid = document.querySelector(".articles-grid");
+    if (!grid) return;
+
+    fetch('articles.json')
+        .then(response => response.json())
+        .then(articles => {
+            // Sort newest to oldest by date if your JSON has a sortable "date" field
+            // articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            function renderArticles() {
+                const start = (currentArticlePage - 1) * articlesPerPage;
+                const end = start + articlesPerPage;
+                const grid = document.querySelector(".articles-grid");
+                grid.innerHTML = "";
+
+                articles.slice(start, end).forEach(article => {
+                    const card = document.createElement("a");
+                    card.classList.add("article-card");
+                    card.href = article.link;
+                    card.target = "_blank";
+                    card.innerHTML = `
+                    <div class="article-card__image">
+                        <img src="${article.image}" alt="${article.title}">
+                    </div>
+                    <div class="article-card__content">
+                        <h3 class="article-card__title">${article.title}</h3>
+                        <p class="article-card__description">${article.description}</p>
+                    </div>
+                    <div class="article-card__footer">
+                        <span class="article-card__author">By ${article.author}</span>
+                        <span class="article-card__date">${article.date}</span>
+                    </div>
+                `;
+                    grid.appendChild(card);
+                });
+
+                document.getElementById('page-number').textContent = currentArticlePage;
+            }
+
+            // Pagination buttons
+            const nextButton = document.getElementById("next");
+            if (nextButton) {
+                nextButton.addEventListener("click", () => {
+                    if (currentArticlePage * articlesPerPage < articles.length) {
+                        currentArticlePage++;
+                        renderArticles();
+                    }
+                });
+            }
+
+            const prevButton = document.getElementById("prev");
+            if (prevButton) {
+                prevButton.addEventListener("click", () => {
+                    if (currentArticlePage > 1) {
+                        currentArticlePage--;
+                        renderArticles();
+                    }
+                });
+            }
+
+            renderArticles();
+        })
+}
+
+// -------------------------
 // Fetch data from card_prices and sealed_prices views
 // -------------------------
 async function fetchPrices() {
@@ -205,7 +276,74 @@ function populateSets() {
     });
 }
 
+function openDatabase() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open("PokemonDB", 1); // version 1
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            // Create an object store for cards
+            if (!db.objectStoreNames.contains("cards")) {
+                db.createObjectStore("cards", { keyPath: "card_id" });
+            }
+        };
+
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            resolve(db);
+        };
+
+        request.onerror = (event) => {
+            reject(event.target.error);
+        };
+    });
+}
+
+async function saveCardsToDB(cards) {
+    const db = await openDatabase();
+    const tx = db.transaction("cards", "readwrite");
+    const store = tx.objectStore("cards");
+
+    // Clear old data
+    store.clear();
+
+    // Add new cards
+    cards.forEach(card => store.put(card));
+
+    return tx.complete; // Promise resolves when transaction is done
+}
+
+async function loadCardsFromDB() {
+    const db = await openDatabase();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("cards", "readonly");
+        const store = tx.objectStore("cards");
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
 async function loadAllCards() {
+    // Show loader
+    const loader = document.getElementById("loading-overlay");
+    if (loader) loader.style.display = "flex";
+
+    // 1. Check sessionStorage first
+    const cached = await loadCardsFromDB();
+    if (cached && cached.length > 0) {
+        console.log("Loaded cards from IndexedDB");
+        cardsData = cached;
+
+        // Hide loader
+        if (loader) loader.style.display = "none";
+        return;
+    }
+
+    // 2. Otherwise, fetch from Supabase'
+    console.log("Fetching cards from Supabase...");
+
     const ninetyDaysAgo = new Date();
     ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
     const ninetyDaysAgoISO = ninetyDaysAgo.toISOString();
@@ -259,6 +397,13 @@ async function loadAllCards() {
             history: sortedPrices
         };
     });
+
+    // 3. Save processed data to sessionStorage
+    await saveCardsToDB(cardsData);
+    console.log("Saved cards to IndexedDB");
+
+    // Hide loader
+    if (loader) loader.style.display = "none";
 }
 
 // -------------------------
@@ -651,14 +796,20 @@ function displaySealed(sealedData) {
 // INIT
 // -------------------------
 document.addEventListener("DOMContentLoaded", async () => {
+    await loadAllCards();
+    populateTicker();
+
+    // Home Page
+    if (document.body.contains(document.getElementById("indexSection"))) {
+        loadArticles();
+        renderCardIndexChart();
+    }
+
     if (document.body.contains(document.getElementById("cardTableBody"))) {
-        await loadAllCards();
         populateRarities();
         populateSets();
-
         displayCards();
         displayTopMovers();
-        populateTicker();
     }
 });
 

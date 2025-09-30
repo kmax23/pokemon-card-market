@@ -238,6 +238,49 @@ footer .disclaimer {
 }
 
 /* ============== */
+/* SETS GRID      */
+/* ============== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.set-card {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.set-card:hover {
+  transform: translateY(-5px);
+}
+
+.set-logo {
+  max-width: 120px;
+  max-height: 60px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.set-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.set-symbol {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* ============== */
 /* ARTICLE CARDS  */
 /* ============== */
 .articles-grid {

@@ -654,35 +654,46 @@ async function renderCardIndexChart() {
 // -------------------------
 async function loadSets() {
     try {
-        const { data, error } = await supabaseClient
-            .from("daily_set_prices") // <-- your Supabase table for sets
-            .select(`
-                set_id,
-                date,
-                avg_price,
-                set:sets(name, release_date, block)
-            `)
-            .order("date", { ascending: false });
+        const { data: sets, error } = await supabaseClient
+            .from("set_with_values")
+            .select("*")
+            .order("release_date", { ascending: false });
 
         if (error) throw error;
 
-        const grouped = {};
-        data.forEach(d => {
-            if (!grouped[d.set_id]) grouped[d.set_id] = [];
-            grouped[d.set_id].push(d);
+        const grid = document.getElementById("setsGrid");
+        if (!grid) return;
+        grid.innerHTML = ""; // clear any existing cards
+
+        sets.forEach(set => {
+            const logoHtml = set.logo_url
+                ? `<img class="set-logo" src="${set.logo_url}" alt="${set.name} logo">`
+                : `<div class="no-logo">No Logo Yet</div>`;
+
+            const symbolHtml = set.symbol_url
+                ? `<img class="set-symbol" src="${set.symbol_url}" alt="${set.name} symbol">`
+                : `<div class="no-symbol">No Symbol Yet</div>`;
+
+            const card = document.createElement("div");
+            card.className = "set-card";
+
+            card.innerHTML = `
+                <div class="set-info">
+                    ${logoHtml}
+                    <div class="set-title">
+                        ${symbolHtml}
+                        <h3>${set.name}</h3>
+                    </div>
+                    <p>Total Market Value: $${set.market_value_total?.toLocaleString() ?? "0"}</p>
+                    <p>Release Date: ${set.release_date ?? "—"}</p>
+                </div>
+            `;
+
+            grid.appendChild(card);
         });
-
-        const setsData = Object.entries(grouped).map(([id, prices]) => ({
-            set_id: id,
-            set: prices[0].set,
-            prices: prices.sort((a, b) => new Date(a.date) - new Date(b.date)),
-            latest: prices[0],
-            previous: prices[1] || null
-        }));
-
-        displaySets(setsData);
     } catch (err) {
-        console.error("Error loading sets:", err);
+        console.error("Error fetching sets:", err);
+        console.log("Full error details:", JSON.stringify(err, null, 2));
     }
 }
 
@@ -810,6 +821,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         populateSets();
         displayCards();
         displayTopMovers();
+    }
+
+    if (document.body.contains(document.getElementById("setsGrid"))) {
+        loadSets();
     }
 });
 

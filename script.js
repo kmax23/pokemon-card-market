@@ -276,74 +276,63 @@ function populateSets() {
     });
 }
 
-function openDatabase() {
+function openDB() {
     return new Promise((resolve, reject) => {
-        const request = indexedDB.open("PokemonDB", 1); // version 1
+        const request = indexedDB.open("pokeStocksDB", 1); // version 1
 
-        request.onupgradeneeded = (event) => {
+        request.onupgradeneeded = function (event) {
             const db = event.target.result;
             // Create an object store for cards
-            if (!db.objectStoreNames.contains("cards")) {
-                db.createObjectStore("cards", { keyPath: "card_id" });
+            if (!db.objectStoreNames.contains("pokemon_data")) {
+                db.createObjectStore("pokemon_data", { keyPath: "id" });
             }
         };
 
-        request.onsuccess = (event) => {
-            const db = event.target.result;
-            resolve(db);
-        };
-
-        request.onerror = (event) => {
-            reject(event.target.error);
-        };
-    });
-}
-
-async function saveCardsToDB(cards) {
-    const db = await openDatabase();
-    const tx = db.transaction("cards", "readwrite");
-    const store = tx.objectStore("cards");
-
-    // Clear old data
-    store.clear();
-
-    // Add new cards
-    cards.forEach(card => store.put(card));
-
-    return tx.complete; // Promise resolves when transaction is done
-}
-
-async function loadCardsFromDB() {
-    const db = await openDatabase();
-    return new Promise((resolve, reject) => {
-        const tx = db.transaction("cards", "readonly");
-        const store = tx.objectStore("cards");
-        const request = store.getAll();
-
         request.onsuccess = () => resolve(request.result);
-        request.onerror = () => reject(request.error);
+        request.onerror = (e) => reject(e);
     });
 }
 
-async function loadAllCards() {
-    // Show loader
+async function saveAllToDB(data) {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("pokemon_data", "readwrite");
+        const store = tx.objectStore("pokemon_data");
+        store.put({ id: "all", ...data });
+        tx.oncomplete = () => resolve(true);
+        tx.onerror = (e) => reject(e);
+    });
+}
+
+async function loadAllFromDB() {
+    const db = await openDB();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction("pokemon_data", "readonly");
+        const store = tx.objectStore("pokemon_data");
+        const req = store.get("all");
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = (e) => reject(e);
+    });
+}
+
+async function loadAllData() {
     const loader = document.getElementById("loading-overlay");
     if (loader) loader.style.display = "flex";
 
-    // 1. Check sessionStorage first
-    const cached = await loadCardsFromDB();
-    if (cached && cached.length > 0) {
-        console.log("Loaded cards from IndexedDB");
-        cardsData = cached;
-
-        // Hide loader
+    // 1. Try IndexedDB cache first
+    const cached = await loadAllFromDB();
+    if (cached?.cards && cached?.sets && cached?.sealed) {
+        console.log("Loaded all data from IndexedDB");
+        cardsData = cached.cards;
+        setsData = cached.sets;
+        sealedData = cached.sealed;
         if (loader) loader.style.display = "none";
         return;
     }
 
-    // 2. Otherwise, fetch from Supabase'
     console.log("Fetching cards from Supabase...");
 
+    // --- Cards (last 90 days) ---
     const ninetyDaysAgo = new Date();
     ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
     const ninetyDaysAgoISO = ninetyDaysAgo.toISOString();
@@ -355,7 +344,7 @@ async function loadAllCards() {
     while (true) {
         const { data, error } = await supabaseClient
             .from("card_prices")
-            .select("card_id, card_name, set_name, rarity, market_price, date")
+            .select("card_id, card_name, set_id, set_name, rarity, market_price, date")
             .order("date", { ascending: true })
             .gte("date", ninetyDaysAgoISO)
             .range(from, from + batchSize - 1);
@@ -389,6 +378,7 @@ async function loadAllCards() {
         return {
             card_id: latest.card_id,
             card_name: latest.card_name,
+            set_id: latest.set_id,
             set_name: latest.set_name,
             rarity: latest.rarity,
             latest_price: latest.market_price,
@@ -398,11 +388,36 @@ async function loadAllCards() {
         };
     });
 
-    // 3. Save processed data to sessionStorage
-    await saveCardsToDB(cardsData);
-    console.log("Saved cards to IndexedDB");
+    // --- Sets ---
+    const { data: sets, error: setsError } = await supabaseClient
+        .from("set_with_values")
+        .select("id, name, release_date, logo_url, symbol_url, market_value_total");
 
-    // Hide loader
+    if (setsError) {
+        console.error("Error loading sets:", setsError);
+    }
+    setsData = sets || [];
+
+    // --- Sealed Products ---
+    const { data: sealed, error: sealedError } = await supabaseClient
+        .from("sealed_prices")
+        .select("sealed_id, sealed_name, market, date");
+
+    if (sealedError) {
+        console.error("Error loading sealed products:", sealedError);
+    }
+    sealedData = sealed || [];
+
+    // 2. Save everything in one IndexedDB entry
+    await saveAllToDB({
+        cards: cardsData,
+        sets: setsData,
+        sealed: sealedData,
+        timestamp: Date.now()
+    });
+
+    console.log("Saved cards, sets, and sealed to IndexedDB");
+
     if (loader) loader.style.display = "none";
 }
 
@@ -461,31 +476,25 @@ document.getElementById("filterRarity")?.addEventListener("change", applyFilters
 
 function displayCards() {
     const tbody = document.getElementById("cardTableBody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-
+    if (!tbody) return; tbody.innerHTML = "";
     const dataToShow = filteredCards.length ? filteredCards : cardsData;
     const start = (currentPage - 1) * pageSize;
     const end = start + pageSize;
     const pageData = dataToShow.slice(start, end);
-
     pageData.forEach(c => {
         const pctChange = c.pctChange ?? 0;
         const pctChangeFormatted = pctChange.toFixed(2) + "%";
         const changeColor = pctChange >= 0 ? "green" : "red";
-
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${c.card_name}</td>
-            <td>${c.set_name || "-"}</td>
-            <td>${c.rarity || "-"}</td>
-            <td>$${c.latest_price.toFixed(2)}</td>
-            <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}%</td>
-            <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>
+         <td>${c.card_name}</td>
+         <td>${c.set_name || "-"}</td>
+         <td>${c.rarity || "-"}</td>
+         <td>$${c.latest_price.toFixed(2)}</td>
+         <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}%</td>
+         <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>;
         `;
-
         tbody.appendChild(tr);
-
         if (c.history && c.history.length >= 2) {
             const ctx = document.getElementById(`spark-${c.card_id}`).getContext("2d");
             new Chart(ctx, {
@@ -503,13 +512,23 @@ function displayCards() {
                 },
                 options: {
                     responsive: false,
-                    plugins: { legend: { display: false } },
-                    scales: { x: { display: false }, y: { display: false } }
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false
+                        },
+                        y: {
+                            display: false
+                        }
+                    }
                 }
             });
         }
     });
-
     const pageInfo = document.getElementById("pageInfo");
     if (pageInfo) pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(dataToShow.length / pageSize)}`;
 }
@@ -654,34 +673,31 @@ async function renderCardIndexChart() {
 // -------------------------
 async function loadSets() {
     try {
-        const { data: sets, error } = await supabaseClient
-            .from("set_with_values")
-            .select("*")
-            .order("release_date", { ascending: false });
-
-        if (error) throw error;
-
+        if (!setsData || !setsData.length) return;
         const grid = document.getElementById("setsGrid");
         if (!grid) return;
-        grid.innerHTML = ""; // clear any existing cards
+        grid.innerHTML = "";
 
-        sets.forEach(set => {
-            const logoHtml = set.logo_url
-                ? `<img class="set-logo" src="${set.logo_url}" alt="${set.name} logo">`
-                : `<div class="no-logo">No Logo Yet</div>`;
-
-            const symbolHtml = set.symbol_url
-                ? `<img class="set-symbol" src="${set.symbol_url}" alt="${set.name} symbol">`
-                : `<div class="no-symbol">No Symbol Yet</div>`;
-
+        setsData.forEach(set => {
             const card = document.createElement("div");
             card.className = "set-card";
 
+            const logoHTML = set.logo_url
+                ? `<img class="set-logo" src="${set.logo_url}" alt="${set.name} logo">`
+                : `<div class="set-logo-placeholder">No Logo Yet</div>`;
+
+            const symbolHTML = set.symbol_url
+                ? `<img class="set-symbol" src="${set.symbol_url}" alt="${set.name} symbol">`
+                : `<div class="set-symbol-placeholder">No Symbol Yet</div>`;
+
+            const expandedId = `expanded-${set.id}`;
+            const tbodyId = `setCardsBody-${set.id}`;
+
             card.innerHTML = `
                 <div class="set-info">
-                    ${logoHtml}
+                    ${logoHTML}
                     <div class="set-title">
-                        ${symbolHtml}
+                        ${symbolHTML}
                         <h3>${set.name}</h3>
                     </div>
                     <p>Total Market Value: $${set.market_value_total?.toLocaleString() ?? "0"}</p>
@@ -689,46 +705,164 @@ async function loadSets() {
                 </div>
             `;
 
+            // Toggle open/close on click
+            card.addEventListener("click", () => {
+                const expanded = card.classList.contains("expanded");
+                const expandedCard = document.querySelector(".set-card.expanded");
+
+                // Collapse currently expanded card
+                if (expandedCard && expandedCard !== card) {
+                    // move it back
+                    const placeholder = expandedCard.dataset.placeholder;
+                    if (placeholder) {
+                        const ref = document.querySelector(`[data-placeholder-id="${placeholder}"]`);
+                        if (ref) ref.replaceWith(expandedCard);
+                    }
+                    expandedCard.classList.remove("expanded");
+                    expandedCard.querySelector(".set-cards-container")?.remove();
+                }
+
+                if (!expanded) {
+                    // Create placeholder where the card was
+                    const placeholder = document.createElement("div");
+                    placeholder.dataset.placeholderId = Date.now().toString();
+                    card.dataset.placeholder = placeholder.dataset.placeholderId;
+                    grid.insertBefore(placeholder, card.nextSibling);
+
+                    // Move the card to the top of the grid
+                    grid.prepend(card);
+                    card.classList.add("expanded");
+
+                    // Create container for card table
+                    let container = card.querySelector(".set-cards-container");
+                    if (!container) {
+                        container = document.createElement("div");
+                        container.className = "set-cards-container";
+                        container.innerHTML = `
+                            <table class="set-card-table">
+                                <thead>
+                                    <tr>
+                                        <th>Card Name</th>
+                                        <th>Rarity</th>
+                                        <th>Latest Price</th>
+                                        <th>% Change</th>
+                                        <th>Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        `;
+                        card.appendChild(container);
+                    }
+
+                    // Load cards into table
+                    const tbody = container.querySelector("tbody");
+                    loadSetCards(set.id, tbody);
+                } else {
+                    // Restore card to its placeholder position
+                    const placeholderId = card.dataset.placeholder;
+                    const ref = document.querySelector(`[data-placeholder-id="${placeholderId}"]`);
+                    if (ref) ref.replaceWith(card);
+                    card.classList.remove("expanded");
+
+                    card.querySelector(".set-cards-container")?.remove();
+                }
+            });
+
             grid.appendChild(card);
         });
     } catch (err) {
         console.error("Error fetching sets:", err);
-        console.log("Full error details:", JSON.stringify(err, null, 2));
     }
 }
 
-function displaySets(setsData) {
-    const tbody = document.getElementById("setsTableBody");
+function filterCardsBySet(setId) {
+    const cards = cardsData.filter(c => String(c.set_id) === String(setId));
+    filteredCards = cards;
+    currentPage = 1;
+    displayCards();
+    const cardsTable = document.getElementById("cardTableBody");
+    if (cardsTable) {
+        cardsTable.scrollIntoView({ behavior: "smooth" });
+    }
+    return cards;
+}
+
+async function loadSetCards(setId, tbody, page = 1, pageSize = 25) {
     if (!tbody) return;
+
+    const setCards = cardsData.filter(c => String(c.set_id) === String(setId));
+    const start = (page - 1) * pageSize;
+    const pagedCards = setCards.slice(start, start + pageSize);
+
     tbody.innerHTML = "";
 
-    setsData.forEach(s => {
+    if (!pagedCards.length) {
+        tbody.innerHTML = `<tr><td colspan="5">No cards found for this set</td></tr>`;
+        return;
+    }
+
+    pagedCards.forEach(c => {
         const tr = document.createElement("tr");
+        const changeColor = c.pctChange >= 0 ? "green" : "red";
+
         tr.innerHTML = `
-            <td>${s.set.name}</td>
-            <td>${s.set.release_date || "—"}</td>
-            <td>$${s.latest.avg_price.toFixed(2)}</td>
-            <td>${s.previous ? ((s.latest.avg_price - s.previous.avg_price) / s.previous.avg_price * 100).toFixed(2) + "%" : "—"}</td>
-            <td><canvas id="spark-set-${s.set_id}" width="100" height="30"></canvas></td>
+            <td>${c.card_name}</td>
+            <td>${c.rarity || "-"}</td>
+            <td>$${c.latest_price?.toFixed(2) ?? "-"}</td>
+            <td style="color:${changeColor};">${c.pctChange?.toFixed(2) ?? "0"}%</td>
+            <td><canvas id="spark-${setId}-${c.card_id}" width="120" height="30"></canvas></td>
         `;
+
         tbody.appendChild(tr);
 
-        const ctx = document.getElementById(`spark-set-${s.set_id}`).getContext("2d");
-        new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: s.prices.map(p => p.date),
-                datasets: [{
-                    data: s.prices.map(p => p.avg_price),
-                    borderColor: colors.bulbasaurTeal,
-                    backgroundColor: "rgba(77,182,172,0.2)",
-                    tension: 0.3,
-                    pointRadius: 0
-                }]
-            },
-            options: { plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
-        });
+        if (c.history && c.history.length >= 2) {
+            const ctx = document.getElementById(`spark-${setId}-${c.card_id}`).getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: c.history.map(h => h.date),
+                    datasets: [{
+                        data: c.history.map(h => parseFloat(h.market_price)),
+                        borderColor: colors.pokeballBlue,
+                        backgroundColor: "rgba(59,76,202,0.2)",
+                        tension: 0.3,
+                        pointRadius: 0,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { display: false } }
+                }
+            });
+        }
     });
+
+    // Pagination buttons inside expanded card
+    const paginationDivId = `setPagination-${setId}`;
+    let paginationDiv = document.getElementById(paginationDivId);
+    if (!paginationDiv) {
+        paginationDiv = document.createElement("div");
+        paginationDiv.id = paginationDivId;
+        paginationDiv.style.marginTop = "0.5rem";
+        paginationDiv.style.textAlign = "center";
+        tbody.parentNode.appendChild(paginationDiv);
+    }
+    paginationDiv.innerHTML = "";
+
+    const totalPages = Math.ceil(setCards.length / pageSize);
+    for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.disabled = i === page;
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            loadSetCards(setId, tbody, i, pageSize);
+        });
+        paginationDiv.appendChild(btn);
+    }
 }
 
 // -------------------------
@@ -807,7 +941,7 @@ function displaySealed(sealedData) {
 // INIT
 // -------------------------
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadAllCards();
+    await loadAllData();
     populateTicker();
 
     // Home Page

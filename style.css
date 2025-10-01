@@ -240,24 +240,61 @@ footer .disclaimer {
 /* ============== */
 /* SETS GRID      */
 /* ============== */
-.card-grid {
+#setsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  gap: 1rem;
 }
 
 .set-card {
+  width: 100%;
+  box-sizing: border-box;
   background: var(--card-bg, #fff);
-  border-radius: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.set-card.expanded {
+  grid-column: 1 / -1;
+  width: 100%;
+  z-index: 10;
+}
+
+.set-expanded {
+  display: none;
+  margin: 1rem auto;
+  max-width: 95%;
+  width: 100%;
+  overflow-x: auto;
+  /* keeps table inside card */
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.set-card.expanded .set-expanded {
+  display: block;
+}
+
+.set-expanded table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
 }
 
 .set-card:hover {
+  background: rgba(59, 76, 202, 0.05);
   transform: translateY(-5px);
+}
+
+.set-details {
+  margin-top: 1rem;
 }
 
 .set-logo {
@@ -280,6 +317,54 @@ footer .disclaimer {
   object-fit: contain;
 }
 
+.set-card-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  /* keeps columns aligned */
+}
+
+.set-card-table th,
+.set-card-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+/* Define column widths explicitly */
+.set-card-table th:nth-child(1),
+.set-card-table td:nth-child(1) {
+  width: 20%;
+}
+/* Card Name */
+
+.set-card-table th:nth-child(2),
+.set-card-table td:nth-child(2) {
+  width: 25%;
+}
+/* Rarity */
+
+.set-card-table th:nth-child(3),
+.set-card-table td:nth-child(3) {
+  width: 25%;
+}
+/* Latest Price */
+
+.set-card-table th:nth-child(4),
+.set-card-table td:nth-child(4) {
+  width: 25%;
+}
+/* % Change */
+
+.set-card-table th:nth-child(5),
+.set-card-table td:nth-child(5) {
+  width: 25%;
+}
+/* Trend chart */
+
+
 /* ============== */
 /* ARTICLE CARDS  */
 /* ============== */
@@ -290,7 +375,9 @@ footer .disclaimer {
   padding: 1rem;
 }
 
-.article-card, .articleCard, .martech-card_content {
+.article-card,
+.articleCard,
+.martech-card_content {
   display: flex;
   flex-direction: column;
   background-color: var(--card-bg);
@@ -302,51 +389,67 @@ footer .disclaimer {
   color: inherit;
 }
 
-.article-card:hover, .articleCard:hover {
+.article-card:hover,
+.articleCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   background-color: var(--card-hover);
 }
 
-.article-card__image img, .martech-card-hero img {
+.article-card__image img,
+.martech-card-hero img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
 
-.article-card__content, .martech-card_content {
+.article-card__content,
+.martech-card_content {
   padding: 1rem;
 }
 
-.article-card__title, .martech-card_content h3 {
+.article-card__title,
+.martech-card_content h3 {
   font-size: 1.25rem;
   font-weight: bold;
   color: var(--heading-color);
   margin-bottom: 0.5rem;
 }
 
-.article-card__description, .martech-card_content p {
+.article-card__description,
+.martech-card_content p {
   font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
-.article-card__footer, .martech-card_footer {
+.article-card__footer,
+.martech-card_footer {
   display: flex;
   justify-content: space-between;
   padding: 0 0.75rem 1rem;
   font-size: 0.85rem;
   color: var(--text-muted);
-  background: rgba(0,0,0,0.03);
-  border-top: 1px solid rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* ===================== */
 /* ARTICLES SECTION      */
 /* ===================== */
-#articles { padding: 40px 20px; background: var(--bg); }
-#articles h2 { margin-bottom: 20px; text-align: center; }
-#articlesGrid { margin-top: 1rem; }
+#articles {
+  padding: 40px 20px;
+  background: var(--bg);
+}
+
+#articles h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#articlesGrid {
+  margin-top: 1rem;
+}
 
 /* Card Chart */
 #cardChart {
@@ -361,7 +464,7 @@ footer .disclaimer {
 #loading-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(155,155,155,0.5);
+  background: rgba(155, 155, 155, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -380,7 +483,15 @@ footer .disclaimer {
   margin-bottom: 15px;
 }
 
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 /* ===================== */
 /* TICKER */
@@ -440,6 +551,17 @@ footer .disclaimer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.card-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card-table th,
+.card-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
 #cardTable th,
 #cardTable td {
   padding: 6px;
@@ -476,8 +598,17 @@ footer .disclaimer {
 /* ===================== */
 /* ABOUT PAGE             */
 /* ===================== */
-.about-hero, .about-content { text-align: center; max-width: 800px; margin: 0 auto; padding: 1rem; }
-.about-content h2 { margin-top: 2rem; }
+.about-hero,
+.about-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.about-content h2 {
+  margin-top: 2rem;
+}
 
 /* ===================== */
 /* PAGINATION             */

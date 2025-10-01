@@ -77,17 +77,6 @@
             <p>Pokémon card sets are the backbone of the TCG market. This page lets you explore each set’s average card
                 value, performance over time, and its place in the broader collecting world.</p>
 
-            <section id="setsGrid" class="card-grid">
-                <!-- Cards will be injected by script.js -->
-            </section>
-
-            <!-- Change data-ad-slot-->
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5524633691531456"
-                data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-
             <!-- Filters -->
             <div class="filters">
                 <select id="filterYear">
@@ -98,19 +87,17 @@
                 </select>
             </div>
 
-            <!-- Sets Table -->
-            <table id="setsTable">
-                <thead>
-                    <tr>
-                        <th>Set Name</th>
-                        <th>Release Date</th>
-                        <th>Avg Card Value</th>
-                        <th>% Change</th>
-                        <th>Trend</th>
-                    </tr>
-                </thead>
-                <tbody id="setsTableBody"></tbody>
-            </table>
+            <section id="setsGrid" class="card-grid">
+                <div id="expandedContainer"></div>
+                <!-- Cards will be injected by script.js -->
+            </section>
+
+            <!-- Change data-ad-slot-->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5524633691531456"
+                data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
 
             <!-- Pagination -->
             <div class="pagination">

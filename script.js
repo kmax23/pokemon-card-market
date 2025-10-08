@@ -235,6 +235,8 @@ const colors = {
 // 3. GLOBAL VARIABLES
 // -------------------------
 let cardsData = [];
+let setsData = [];
+let sealedData = [];
 let currentPage = 1;
 const pageSize = 50;
 let hoverChartInstance = null;
@@ -391,7 +393,8 @@ async function loadAllData() {
     // --- Sets ---
     const { data: sets, error: setsError } = await supabaseClient
         .from("set_with_values")
-        .select("id, name, release_date, logo_url, symbol_url, market_value_total");
+        .select("id, name, release_date, logo_url, symbol_url, market_value_total")
+        .order("release_date", { ascending: false });
 
     if (setsError) {
         console.error("Error loading sets:", setsError);
@@ -491,7 +494,7 @@ function displayCards() {
          <td>${c.set_name || "-"}</td>
          <td>${c.rarity || "-"}</td>
          <td>$${c.latest_price.toFixed(2)}</td>
-         <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}%</td>
+         <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}</td>
          <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>;
         `;
         tbody.appendChild(tr);
@@ -671,7 +674,23 @@ async function renderCardIndexChart() {
 // -------------------------
 // 11. FETCH SETS
 // -------------------------
+let pullRates = [];
+
+async function fetchPullRates() {
+    try {
+        const response = await fetch("pull_rates.json");
+        if (!response.ok) throw new Error("Failed to load pull_rates.json");
+        pullRates = await response.json();
+        console.log("✅ Pull rates loaded:", pullRates);
+    } catch (err) {
+        console.error("⚠️ Could not load pull rate data:", err);
+    }
+}
 async function loadSets() {
+    if (!Array.isArray(setsData)) {
+        console.error("❌ setsData is not an array:", setsData);
+        return;
+    }
     try {
         if (!setsData || !setsData.length) return;
         const grid = document.getElementById("setsGrid");
@@ -679,6 +698,20 @@ async function loadSets() {
         grid.innerHTML = "";
 
         setsData.forEach(set => {
+            const rates = pullRates[String(set.id)] || {};
+
+            const doubleAny = rates["Double Rare"]?.["Any Double Rare"] ?? "--";
+            const doubleSpecific = rates["Double Rare"]?.["Specific Double Rare"] ?? "--";
+            const ultraAny = rates["Ultra Rare"]?.["Any Ultra Rare"] ?? "--";
+            const ultraSpecific = rates["Ultra Rare"]?.["Specific Ultra Rare"] ?? "--";
+            const illustrationAny = rates["Illustration Rare"]?.["Any Illustration Rare"] ?? "--";
+            const illustrationSpecific = rates["Illustration Rare"]?.["Specific Illustration Rare"] ?? "--";
+            const specialIllustrationAny = rates["Special Illustration Rare"]?.["Any Special Illustration Rare"] ?? "--";
+            const specialIllustrationSpecific = rates["Special Illustration Rare"]?.["Specific Special Illustration Rare"] ?? "--";
+            const megaHyperAny = rates["Mega Hyper Rare"]?.["Any Mega Hyper Rare"] ?? "--";
+            const megaHyperSpecific = rates["Mega Hyper Rare"]?.["Specific Mega Hyper Rare"] ?? "--";
+            const secretRare = rates["Secret Rare Hit Rate"]?.["Chance of opening at least 1 Mega Hyper Rare, Special Illustration Rare, Illustration Rare, or Ultra Rare"] ?? "--";
+
             const card = document.createElement("div");
             card.className = "set-card";
 
@@ -694,14 +727,36 @@ async function loadSets() {
             const tbodyId = `setCardsBody-${set.id}`;
 
             card.innerHTML = `
-                <div class="set-info">
+                <!-- ROW 1: Logo -->
+                <div class="set-row set-row-logo" style="text-align: center; margin-bottom: 0.5rem;">
                     ${logoHTML}
-                    <div class="set-title">
-                        ${symbolHTML}
-                        <h3>${set.name}</h3>
+                </div>
+                
+                <!-- ROW 2: Symbol + Set Name -->
+                <div class="set-row set-row-title" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                    ${symbolHTML}
+                    <h3 style="margin: 0;">${set.name}</h3>
+                </div>
+                
+                <!-- ROW 3: Two columns -->
+                <div class="set-row set-row-info" style="display: flex; justify-content: space-between; gap: 2rem;">
+                    <!-- Left column: Total Market Value + Release Date -->
+                    <div class="set-info-left" style="flex: 1; font-size: 1.6rem;">
+                        <p><strong>Total Market Value:</strong> $${set.market_value_total?.toLocaleString() ?? "0"}</p>
+                        <p><strong>Release Date:</strong> ${set.release_date ?? "—"}</p>
                     </div>
-                    <p>Total Market Value: $${set.market_value_total?.toLocaleString() ?? "0"}</p>
-                    <p>Release Date: ${set.release_date ?? "—"}</p>
+
+                    <!-- Right column: Pull Rates -->
+                    <div class="set-info-right" style="flex: 1; text-align: center;">
+                        <div class="pull-rate">
+                            <p><strong>Double Rare:</strong><br>Any Double Rare: ${doubleAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Double Rare: ${doubleSpecific}</p>
+                            <p><strong>Ultra Rare:</strong><br>Any Ultra Rare: ${ultraAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Ultra Rare: ${ultraSpecific}</p>
+                            <p><strong>Illustration Rare:</strong><br>Any Illustration Rare: ${illustrationAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Illustration Rare: ${illustrationSpecific}</p>
+                            <p><strong>Special Illustration Rare:</strong><br>Any Special Illustration Rare: ${specialIllustrationAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Special Illustration Rare: ${specialIllustrationSpecific}</p>
+                            <p><strong>Mega Hyper Rare:</strong><br>Any Mega Hyper Rare: ${megaHyperAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Mega Hyper Rare: ${megaHyperSpecific}</p>
+                            <p><strong>Secret Rare Hit Rate:</strong> ${secretRare}</p>
+                        </div>
+                    </div>
                 </div>
             `;
 
@@ -941,24 +996,49 @@ function displaySealed(sealedData) {
 // INIT
 // -------------------------
 document.addEventListener("DOMContentLoaded", async () => {
+    console.log("✅ DOM loaded — initializing app...");
+
     await loadAllData();
+
+    console.log("✅ loadAllData complete");
+    console.log("cardsData:", cardsData?.length || 0, "setsData:", setsData?.length || 0, "sealedData:", sealedData?.length || 0);
+
     populateTicker();
 
     // Home Page
-    if (document.body.contains(document.getElementById("indexSection"))) {
+    if (document.getElementById("indexSection")) {
+        console.log("🏠 Loading home page elements...");
         loadArticles();
         renderCardIndexChart();
     }
 
-    if (document.body.contains(document.getElementById("cardTableBody"))) {
+    // Cards Page
+    if (document.getElementById("cardTableBody")) {
+        console.log("📊 Loading cards page...");
         populateRarities();
         populateSets();
         displayCards();
         displayTopMovers();
     }
 
-    if (document.body.contains(document.getElementById("setsGrid"))) {
+    // Sets Page
+    if (document.getElementById("setsGrid")) {
+        console.log("🧩 Loading sets page...");
+        // Ensure we have sets
+        if (!setsData || !setsData.length) {
+            console.warn("⚠️ Sets data missing after loadAllData() — reloading...");
+            await loadAllData();
+            console.log("✅ Reload complete — setsData:", setsData?.length || 0);
+        }
+
+        if (!setsData || !setsData.length) {
+            console.error("❌ Still no setsData — possible Supabase issue or empty cache.");
+            return;
+        }
+
+        await fetchPullRates();
         loadSets();
+        console.log("✅ loadSets() called successfully");
     }
 });
 

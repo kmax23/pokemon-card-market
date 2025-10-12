@@ -495,7 +495,7 @@ function displayCards() {
          <td>${c.rarity || "-"}</td>
          <td>$${c.latest_price.toFixed(2)}</td>
          <td id="change-${c.card_id}" style="color: ${changeColor};">${pctChangeFormatted}</td>
-         <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>;
+         <td><canvas id="spark-${c.card_id}" width="120" height="30"></canvas></td>
         `;
         tbody.appendChild(tr);
         if (c.history && c.history.length >= 2) {

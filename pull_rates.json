@@ -1,211 +1,1932 @@
 {
-    "604":{
-        "Holographic Rare": {
-            "Any Holographic Rare": "1/3",
-            "Specific Holographic Rare": "1/15"
+    "604": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "2/3",
+            "Specific Non-Holo Rare": "1/48"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/48"
         }
     },
-    "605": {},
-    "630": {},
-    "635": {},
-    "648": {},
-    "1367": {},
-    "1368": {},
-    "1369": {},
-    "1370": {},
-    "1372": {},
-    "1373": {},
-    "1374": {},
-    "1375": {},
-    "1376": {},
-    "1377": {},
-    "1378": {},
-    "1379": {},
-    "1380": {},
-    "1381": {},
-    "1382": {},
-    "1383": {},
-    "1384": {},
-    "1385": {},
-    "1386": {},
-    "1387": {},
-    "1389": {},
-    "1390": {},
-    "1391": {},
-    "1392": {},
-    "1393": {},
-    "1394": {},
-    "1395": {},
-    "1396": {},
-    "1397": {},
-    "1398": {},
-    "1399": {},
-    "1400": {},
-    "1401": {},
-    "1402": {},
-    "1403": {},
-    "1404": {},
-    "1405": {},
-    "1406": {},
-    "1407": {},
-    "1408": {},
-    "1409": {},
-    "1410": {},
-    "1411": {},
-    "1412": {},
-    "1413": {},
-    "1414": {},
-    "1415": {},
-    "1416": {},
-    "1417": {},
-    "1418": {},
-    "1419": {},
-    "1421": {},
-    "1422": {},
-    "1423": {},
-    "1424": {},
-    "1426": {},
-    "1427": {},
-    "1428": {},
-    "1429": {},
-    "1430": {},
-    "1432": {},
-    "1433": {},
-    "1434": {},
-    "1439": {},
-    "1440": {},
-    "1441": {},
-    "1442": {},
-    "1444": {},
-    "1446": {},
-    "1447": {},
-    "1450": {},
-    "1451": {},
-    "1452": {},
-    "1453": {},
-    "1455": {},
-    "1464": {},
-    "1465": {},
-    "1481": {},
-    "1494": {},
-    "1509": {},
-    "1522": {},
-    "1525": {},
-    "1528": {},
-    "1532": {},
-    "1533": {},
-    "1534": {},
-    "1536": {},
-    "1538": {},
-    "1539": {},
-    "1540": {},
-    "1541": {},
-    "1542": {},
-    "1543": {},
-    "1576": {},
-    "1661": {},
-    "1663": {},
-    "1692": {},
-    "1694": {},
-    "1701": {},
-    "1728": {},
-    "1729": {},
-    "1780": {},
-    "1796": {},
-    "1815": {},
-    "1840": {},
-    "1842": {},
-    "1853": {},
-    "1861": {},
-    "1863": {},
-    "1919": {},
-    "1938": {},
-    "1957": {},
-    "2054": {},
-    "2069": {},
-    "2071": {},
-    "2148": {},
-    "2155": {},
-    "2175": {},
-    "2178": {},
-    "2205": {},
-    "2208": {},
-    "2209": {},
-    "2214": {},
-    "2278": {},
-    "2282": {},
-    "2289": {},
-    "2295": {},
-    "2328": {},
-    "2332": {},
-    "2364": {},
-    "2374": {},
-    "2377": {},
-    "2409": {},
-    "2420": {},
-    "2464": {},
-    "2480": {},
-    "2534": {},
-    "2545": {},
-    "2555": {},
-    "2585": {},
-    "2594": {},
-    "2626": {},
-    "2675": {},
-    "2685": {},
-    "2686": {},
-    "2701": {},
-    "2754": {},
-    "2765": {},
-    "2776": {},
-    "2781": {},
-    "2782": {},
-    "2807": {},
-    "2848": {},
-    "2867": {},
-    "2906": {},
-    "2931": {},
-    "2948": {},
-    "3020": {},
-    "3040": {},
-    "3051": {},
-    "3064": {},
-    "3068": {},
-    "3087": {},
-    "3118": {},
-    "3150": {},
-    "3170": {},
-    "3172": {},
-    "3179": {},
-    "17674": {},
-    "17688": {},
-    "17689": {},
-    "22872": {},
-    "22873": {},
-    "22880": {},
-    "23095": {},
-    "23120": {},
-    "23228": {},
-    "23237": {},
-    "23266": {},
-    "23286": {},
-    "23306": {},
-    "23323": {},
-    "23330": {},
-    "23353": {},
-    "23381": {},
-    "23473": {},
-    "23520": {},
-    "23529": {},
-    "23537": {},
-    "23561": {},
-    "23651": {},
-    "23821": {},
-    "24073": {},
-    "24163": {},
-    "24269": {},
-    "24325": {},
-    "24326": {},
+    "605": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "2/3",
+            "Specific Non-Holo Rare": "1/18"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/60"
+        }
+    },
+    "630": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "2/3",
+            "Specific Non-Holo Rare": "2/45"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/45"
+        }
+    },
+    "635": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "2/3",
+            "Specific Non-Holo Rare": "1/24"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/48"
+        }
+    },
+    "648": {
+        "N/A": "No specific information available regarding a 'pull rate' for this set."
+    },
+    "1367": {
+        "Secret Rare": {
+            "Any Secret Rare": "1/36",
+            "Specific Secret Rare": "1/108"
+        },
+        "Rotom": {
+            "Any Rotom": "1/18",
+            "Specific Rotom": "1/108"
+        },
+        "LV.X": {
+            "Any LV.X": "1/18",
+            "Specific LV.X": "1/162"
+        }
+    },
+    "1368": {
+        "Secret Rare": "1/36",
+        "LV.X": {
+            "Any LV.X": "1/18",
+            "Specific LV.X": "1/54"
+        }
+    },
+    "1369": {
+        "Shiny Holo Rare": {
+            "Any Shiny Holo Rare": "1/18",
+            "Specific Shiny Holo Rare": "1/54"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/36",
+            "Specific Secret Rare": "1/108"
+        },
+        "LV.X": {
+            "Any LV.X": "1/18",
+            "Specific LV.X": "1/90"
+        }
+    },
+    "1370": {
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/18",
+            "Specific Rare Holo EX": "1/108"
+        },
+        "Rare ACE": {
+            "Any Rare ACE": "1/24",
+            "Specific Rare ACE": "1/96"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/36",
+            "Specific Ultra Rare": "1/213"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/113",
+            "Specific Secret Rare": "1/450"
+        }
+    },
+    "1372": {
+        "Holo Rare": {
+            "Any Holo Rare": "16/57",
+            "Specific Holo Rare": "1/114"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/19",
+            "Specific Secret Rare": "1/114"
+        }
+    },
+    "1373": {
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/54"
+        },
+        "Secret Rare": "1/54"
+    },
+    "1374": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/1",
+        "Pokémon-ex": "1/36",
+        "Secret Rare": "1/72"
+    },
+    "1375": {
+        "Rare Holo": "1/3",
+        "Pokémon-ex": "1/8",
+        "Secret Rare": "1/36"
+    },
+    "1376": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/1",
+        "Pokémon-ex": "1/8",
+        "Secret Rare": "1/36"
+    },
+    "1377": {
+        "Rare Holo": "1/4",
+        "Pokémon-ex": "1/8",
+        "Secret Rare Jirachi": "1/36"
+    },
+    "1378": {
+        "Rare Holo": "1/8",
+        "Reverse Rare Holo": "1/1",
+        "Pokémon-ex": "1/24",
+        "Gold Star": "1/72"
+    },
+    "1379": {
+        "Rare Holo": "1/4",
+        "Reverse Holo Energy": "1/3",
+        "Pokémon-ex": "1/36",
+        "Gold Star": "1/72"
+    },
+    "1380": {
+        "Rare Holo": "1/3",
+        "Pokémon LV.X": "1/36"
+    },
+    "1381": {
+        "Rare Holo": "1/4",
+        "Rare Prime": "1/7"
+    },
+    "1382": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/12",
+        "Rare Holo EX": "1/18",
+        "Full-Art Ultra Rare": "1/72",
+        "Secret Rare": "1/720"
+    },
+    "1383": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Pokémon-ex": "1/12",
+        "Gold Star Pokémon": "1/36"
+    },
+    "1384": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Pokémon LV.X": "1/12",
+        "Secret Rare": "1/108"
+    },
+    "1385": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Full-Art Ultra Rare": "1/18",
+        "Full-Art Trainer": "1/72"
+    },
+    "1386": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/11",
+        "Rare Holo EX": "1/18",
+        "Ultra Rare": "1/36",
+        "Secret Rare": "1/108"
+    },
+    "1387": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "EX": "1/9",
+        "Full-Art EX": "1/18",
+        "Secret Rare": "1/72"
+    },
+    "1389": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Shining Pokémon": "1/18"
+    },
+    "1390": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Level X": "1/36"
+    },
+    "1391": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Arceus (AR)": "1/4"
+    },
+    "1392": {
+        "Rare Holo": "1/4",
+        "Reverse Holo": "1/9",
+        "EX": "1/8"
+    },
+    "1393": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Pokémon-EX": "1/18",
+        "Full-Art Pokémon-EX": "1/27",
+        "Secret Rare": "1/54"
+    },
+    "1394": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Pokémon-EX": "1/15",
+        "Full-Art Pokémon-EX": "1/27",
+        "Secret Rare": "1/54"
+    },
+    "1395": {
+        "Rare Holo": "1/4",
+        "Reverse Holo": "1/9",
+        "Crystal Pokémon": "1/36"
+    },
+    "1396": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "1/3",
+            "Specific Non-Holo Rare": "1/48"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/57"
+        }
+    },
+    "1397": {
+        "Rare Holo": "1/3",
+        "Reverse Holo": "1/9",
+        "Crystal Pokémon": "1/36"
+    },
+    "1398": {
+        "Rare Holo": "1/4",
+        "Reverse Holo": "1/9",
+        "Gold Star Pokémon": "1/80",
+        "Pokémon ex": "1/12"
+    },
+    "1399": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Pokémon LEGEND": "1/15",
+        "Pokémon Prime": "1/7"
+    },
+    "1400": {
+        "Holo Rare": "1/3",
+        "Reverse Holo Rare": "1/9",
+        "Full Art Pokémon": "1/18",
+        "Secret Rare": "1/80"
+    },
+    "1401": {
+        "N/A": "There are no specific pull rates for 2011 McDonald's Collection."
+    },
+    "1402": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Alph Lithograph": "1/36",
+        "Pokémon LEGEND": "1/15",
+        "Pokémon Prime": "1/7"
+    },
+    "1403": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Alph Lithograph": "1/72",
+        "Pokémon LEGEND": "1/18",
+        "Pokémon Prime": "1/7"
+    },
+    "1404": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Gold Star": "1/80",
+        "Pokémon-ex": "1/12"
+    },
+    "1405": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Pokémon LV.X": "1/24"
+    },
+    "1406": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Pokémon LV.X": "1/12"
+    },
+    "1407": {
+        "N/A": "There are no specific pull rates for Black & White Promos."
+    },
+    "1408": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/12",
+        "Rare Holo EX": "1/18",
+        "Rare ACE": "1/18",
+        "Ultra Rare": "1/25",
+        "Secret Rare": "1/98"
+    },
+    "1409": {
+        "RC Rare": "1/20",
+        "Rare Holo": "1/2",
+        "Rare Holo EX": "1/6",
+        "Ultra Rare": "1/4",
+        "Secret Rare": "1/108"
+    },
+    "1410": {
+        "Rare Holo": "1/5",
+        "Reverse Rare Holo": "1/4",
+        "Pokémon-ex": "1/12"
+    },
+    "1411": {
+        "Rare Holo": "1/5",
+        "Reverse Rare Holo": "1/4",
+        "Gold Star": "1/108",
+        "Pokémon-ex": "1/108"
+    },
+    "1412": {
+        "Rare Holo": "1/4",
+        "Reverse Rare Holo": "1/9",
+        "Rare Holo EX": "1/18",
+        "Ultra Rare": "1/36",
+        "Secret Rare": "1/108"
+    },
+    "1413": {
+        "Rare Holo": "1/5",
+        "Reverse Rare Holo": "1/17",
+        "Rare Holo EX": "1/14",
+        "Rare ACE": "1/24",
+        "Ultra Rare": "1/42",
+        "Secret Rare": "1/75"
+    },
+    "1414": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1415": {
+        "Reverse Holo": "1/1",
+        "Rare Holo": "1/4",
+        "Pokémon-ex": "1/9",
+        "Shiny Pokémon": "1/36",
+        "Secret Rare": "1/36"
+    },
+    "1416": {
+        "Reverse Holo": "1/1",
+        "Rare Holo": "1/4",
+        "Pokémon-ex": "1/18",
+        "Secret Rare": "1/36"
+    },
+    "1417": {
+        "Reverse Holo Rare": "1/4",
+        "Rare Holo": "1/4",
+        "Pokémon LV.X": "1/18",
+        "Secret Rare (Legendary Birds)": "1/36"
+    },
+    "1418": {
+        "N/A": "There are no specific pull rates for Wizards of the Coast Promos."
+    },
+    "1419": {
+        "Reverse Holo": "1/1",
+        "Rare Holo": "1/4",
+        "Pokémon-ex": "1/9",
+        "Secret Rare (Bird Trio)": "1/36"
+    },
+    "1421": {
+        "N/A": "There are no specific pull rates for Diamond & Pearl Promos."
+    },
+    "1422": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1423": {
+        "N/A": "There are no specific pull rates for Nintendo Promos."
+    },
+    "1424": {
+        "Reverse Holo Rare": "1/3",
+        "Rare Holo": "1/3",
+        "Full-Art Pokémon": "1/18"
+    },
+    "1426": {
+        "Reverse Holo": "1/1",
+        "Rare Holo": "1/4",
+        "Secret Rare": "1/24"
+    },
+    "1427": {
+        "N/A": "There are no specific pull rates for 2012 McDonald's Collection."
+    },
+    "1428": {
+        "Reverse Holo Rare": "1/4",
+        "Rare Holo": "1/4",
+        "Pokémon-ex": "1/12",
+        "Gold Star": "1/72"
+    },
+    "1429": {
+        "Reverse Holo Rare": "1/3",
+        "Rare Holo": "1/3",
+        "Pokémon-ex": "1/18"
+    },
+    "1430": {
+        "Reverse Holo Rare": "1/3",
+        "Holo Rare": "1/3",
+        "Level X": "1/36"
+    },
+    "1432": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1433": {
+        "N/A": "There are no specific pull rates for Pokémon Rumble."
+    },
+    "1434": {
+        "Reverse Holo Rare": "1/3",
+        "Holo Rare": "1/3",
+        "Shining Pokémon": "1/18"
+    },
+    "1439": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1440": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "1/2",
+            "Specific Non-Holo Rare": "1/32"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/60"
+        }
+    },
+    "1441": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "1/2",
+            "Specific Non-Holo Rare": "1/35"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/57"
+        }
+    },
+    "1442": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1444": {
+        "Any Shining Pokémon": "1/12",
+        "Specific Shining Pokémon": "1/96"
+    },
+    "1446": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1447": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1450": {
+        "Special EX or Star": "1/40"
+    },
+    "1451": {
+        "N/A": "There are no specific pull rates for XY Promos."
+    },
+    "1452": {
+        "Espeon Gold Star": "1/40",
+        "Umbreon Gold Star": "1/40",
+        "ex": "1/40"
+    },
+    "1453": {
+        "N/A": "There are no specific pull rates for HeartGold & SoulSilver Promos."
+    },
+    "1455": {
+        "N/A": "There are no specific pull rates for Best of Game."
+    },
+    "1464": {
+        "Ultra Rare / EX / Secret": "1/7",
+        "Holo Rare (non-UR)": "1/5",
+        "Reverse Holo Rare": "1/3",
+        "Specific Secret Rare": "1/108-125+"
+    },
+    "1465": {
+        "RC Rare (any)": "1/20",
+        "Specific RC Card": "1/500"
+    },
+    "1481": {
+        "Ultra Rare / Full-Art / EX (any)": "1/7",
+        "Secret Rare (any)": "1/108",
+        "Specific Secret Rare": "1/216"
+    },
+    "1494": {
+        "Normal Holo Rare (any)": "1/6",
+        "Team Flare / Special Holo (any)": "1/42",
+        "Pokémon EX / Mega EX / EX-style (any)": "1/10",
+        "Full Art / FA Trainer / Secret-type (any)": "1/24",
+        "Any EX-style or Full-Art / Secret": "1/7",
+        "Specific Pokémon EX (1 of 15)": "1/108",
+        "Any Secret Rare (1 of 3 total)": "1/114",
+        "Specific Secret Rare": "1/342"
+    },
+    "1509": {
+        "Reverse Rare Holo": {
+            "Any Reverse Rare Holo": "1/7",
+            "Specific Reverse Rare Holo": "1/132"
+        },
+        "Rare Holo": {
+            "Any Rare Holo": "1/6",
+            "Specific Rare Holo": "1/116"
+        },
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/9",
+            "Specific Rare Holo EX": "1/108"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/17",
+            "Specific Ultra Rare": "1/273"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/125",
+            "Specific Secret Rare": "1/500"
+        }
+    },
+    "1522": {
+        "N/A": "There are no specific pull rates for Kalos Starter Set."
+    },
+    "1525": {
+        "Reverse Rare Holo": {
+            "Any Reverse Rare Holo": "1/5",
+            "Specific Reverse Rare Holo": "1/32"
+        },
+        "Rare Holo": {
+            "Any Rare Holo": "1/1",
+            "Specific Rare Holo": "1/7"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/9",
+            "Specific Ultra Rare": "1/18"
+        }
+    },
+    "1528": {
+        "N/A": "There are no specific pull rates for Jumbo Cards."
+    },
+    "1532": {
+        "N/A": "There are no specific pull rates for XY Trainer Kits."
+    },
+    "1533": {
+        "N/A": "There are no specific pull rates for XY Trainer Kits."
+    },
+    "1534": {
+        "Reverse Rare Holo": {
+            "Any Reverse Rare Holo": "1/12",
+            "Specific Reverse Rare Holo": "1/121"
+        },
+        "Rare Holo": {
+            "Any Rare Holo": "1/6",
+            "Specific Rare Holo": "1/64"
+        },
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/9",
+            "Specific Rare Holo EX": "1/99"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/17",
+            "Specific Ultra Rare": "1/188"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/125",
+            "Specific Secret Rare": "1/250"
+        }
+    },
+    "1536": {
+        "N/A": "There are no specific pull rates for XY Trainer Kits."
+    },
+    "1538": {
+        "N/A": "There are no specific pull rates for BW Trainer Kits."
+    },
+    "1539": {
+        "N/A": "There are no specific pull rates for League & Championship Cards."
+    },
+    "1540": {
+        "N/A": "There are no specific pull rates for HGSS Trainer Kits."
+    },
+    "1541": {
+        "N/A": "There are no specific pull rates for DP Trainer Kits."
+    },
+    "1542": {
+        "N/A": "There are no specific pull rates for EX Trainer Kits."
+    },
+    "1543": {
+        "N/A": "There are no specific pull rates for EX Trainer Kits."
+    },
+    "1576": {
+        "Rare Holo": {
+            "Any Rare Holo": "1/3",
+            "Specific Rare Holo": "1/24"
+        },
+        "Full-Art Trainer": {
+            "Any Full-Art Trainer": "1/12",
+            "Specific Full-Art Trainer": "1/12"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/6",
+            "Specific Ultra Rare": "1/132"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/72",
+            "Specific Secret Rare": "1/360"
+        }
+    },
+    "1661": {
+        "Reverse Rare Holo": {
+            "Any Reverse Rare Holo": "1/16",
+            "Specific Reverse Rare Holo": "1/262"
+        },
+        "Rare Holo": {
+            "Any Rare Holo": "1/6",
+            "Specific Rare Holo": "1/90"
+        },
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/11",
+            "Specific Rare Holo EX": "1/90"
+        },
+        "Rare BREAK": {
+            "Any Rare BREAK": "1/13",
+            "Specific Rare BREAK": "1/77"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/17",
+            "Specific Ultra Rare": "1/171"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/125",
+            "Specific Secret Rare": "1/250"
+        }
+    },
+    "1663": {
+        "Non-Holo Rare": {
+            "Any Non-Holo Rare": "2/3",
+            "Specific Non-Holo Rare": "1/48"
+        },
+        "Holo Rare": {
+            "Any Holo Rare": "1/3",
+            "Specific Holo Rare": "1/48"
+        }
+    },
+    "1692": {
+        "N/A": "There are no specific pull rates for 2014 McDonald's Collection."
+    },
+    "1694": {
+        "N/A": "There are no specific pull rates for 2015 McDonald's Collection."
+    },
+    "1701": {
+        "Rare Holo (non-EX / non-BREAK)": {
+            "Any Rare Holo (non-EX / non-BREAK)": "1/6",
+            "Specific Rare Holo (non-EX / non-BREAK)": "1/42"
+        },
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/10",
+            "Specific Rare Holo EX": "1/110"
+        },
+        "Rare BREAK": {
+            "Any Rare BREAK": "1/15",
+            "Specific Rare BREAK": "1/75"
+        },
+        "Ultra Rare (non-secret)": {
+            "Any Ultra Rare (non-secret)": "1/17",
+            "Specific Ultra Rare (non-secret)": "1/153"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/125",
+            "Specific Secret Rare": "1/125"
+        }
+    },
+    "1728": {
+        "Rare Holo": "1/10",
+        "Rare Holo EX": "1/5",
+        "RC Rare Holo EX": "1/13",
+        "Ultra Rare": "1/45",
+        "RC Ultra Rare": "1/5"
+    },
+    "1729": {
+        "RC Rare Holo EX": "1/13",
+        "RC Ultra Rare": "1/5"
+    },
+    "1780": {
+        "N/A": "There is no reliable, well-documented, large-sample pull rate breakdowns for Fates Collide. The estimation is ~ 1 EX-type card in every 4 packs."
+    },
+    "1796": {
+        "N/A": "There are no specific pull rates for XY Trainer Kits."
+    },
+    "1815": {
+        "Rare Holo (non-EX / non-BREAK)": {
+            "Any Rare Holo (non-EX / non-BREAK)": "1/5",
+            "Specific Rare Holo (non-EX / non-BREAK)": "1/45"
+        },
+        "Rare Holo EX": {
+            "Any Rare Holo EX": "1/15",
+            "Specific Rare Holo EX": "1/90"
+        },
+        "Rare BREAK": {
+            "Any Rare BREAK": "1/15",
+            "Specific Rare BREAK": "1/105"
+        },
+        "Ultra Rare (non-secret)": {
+            "Any Ultra Rare (non-secret)": "1/17",
+            "Specific Ultra Rare (non-secret)": "1/136"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/125",
+            "Specific Secret Rare": "1/250"
+        }
+    },
+    "1840": {
+        "N/A": "There are no specific pull rates for Deck Exclusives."
+    },
+    "1842": {
+        "Holo Rare": "1/7",
+        "Ultra Rare": "1/9",
+        "Golden Rare": "1/21",
+        "Charizard": "1/79",
+        "Reverse Charizard": "1/102",
+        "Mega Charizard": "1/142"
+    },
+    "1853": {
+        "N/A": "There are no specific pull rates for EX Battle Stadium."
+    },
+    "1861": {
+        "N/A": "There are no specific pull rates for Sun & Moon Promos."
+    },
+    "1863": {
+        "rare Ultra": "1/24",
+        "rare Ultra - Pokémon (Full-Art)": "1/35",
+        "rare Ultra - Trainer (Full-Art)": "1/72",
+        "rare Holo GX": "1/9",
+        "rare Rainbow": "1/68",
+        "rare Secret": "1/123",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/123",
+        "Hits": "1/6"
+    },
+    "1919": {
+        "rare Ultra": "1/28",
+        "rare Ultra - Pokémon (Full-Art)": "1/35",
+        "rare Ultra - Trainer (Full-Art)": "1/139",
+        "rare Holo GX": "1/9",
+        "rare Rainbow": "1/77",
+        "rare Secret": "1/123",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/123",
+        "Hits": "1/6"
+    },
+    "1938": {
+        "N/A": "There are no specific pull rates for Alternate Art Promos."
+    },
+    "1957": {
+        "rare Ultra": "1/25",
+        "rare Ultra - Pokémon (Full-Art)": "1/37",
+        "rare Ultra - Trainer (Full-Art)": "1/80",
+        "rare Holo GX": "1/9",
+        "rare Rainbow": "1/63",
+        "rare Secret": "1/106",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/106",
+        "Hits": "1/6"
+    },
+    "2054": {
+        "rare Ultra": "1/25",
+        "rare Ultra - Pokémon (Full-Art)": "1/36",
+        "rare Ultra - Trainer (Full-Art)": "1/85",
+        "rare Holo GX": "1/8",
+        "rare Rainbow": "1/67",
+        "rare Secret": "1/110",
+        "rare Secret - Pokémon ('Tube' Mewtwo)": "1/110",
+        "rare Secret - Trainer/Energy": "N/A",
+        "rare Shiny": "1/11",
+        "Hits": "1/4"
+    },
+    "2069": {
+        "N/A": "There are no specific pull rates for SM Trainer Kits."
+    },
+    "2071": {
+        "rare Ultra": "1/23",
+        "rare Ultra - Pokémon (Full-Art)": "1/31",
+        "rare Ultra - Trainer (Full-Art)": "1/85",
+        "rare Holo GX": "1/12",
+        "rare Rainbow": "1/90",
+        "rare Secret": "1/90",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/90",
+        "Hits": "1/7"
+    },
+    "2148": {
+        "N/A": "There are no specific pull rates for 2017 McDonald's Collection."
+    },
+    "2155": {
+        "N/A": "There are no specific pull rates for Countdown Calendar."
+    },
+    "2175": {
+        "N/A": "There are no specific pull rates for Burger Kind Promos."
+    },
+    "2178": {
+        "rare Ultra": "1/23",
+        "rare Ultra - Pokémon (Full-Art)": "1/43",
+        "rare Ultra - Trainer (Full-Art)": "1/50",
+        "rare Holo GX": "1/12",
+        "rare Rainbow": "1/67",
+        "rare Secret": "1/129",
+        "rare Secret - Pokémon (Gold)": "1/558",
+        "rare Secret - Trainer/Energy (Gold)": "1/167",
+        "rare Prism Star": "1/11",
+        "Hits": "1/4"
+    },
+    "2205": {
+        "N/A": "There are no specific pull rates for Pikachu World Collection Promos."
+    },
+    "2208": {
+        "N/A": "There are no specific pull rates for SM Trainer Kits."
+    },
+    "2209": {
+        "rare Ultra": "1/28",
+        "rare Ultra - Pokémon (Full-Art)": "1/44",
+        "rare Ultra - Trainer (Full-Art)": "1/79",
+        "rare Holo GX": "1/13",
+        "rare Rainbow": "1/74",
+        "rare Secret": "1/140",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/140",
+        "rare Prism Star": "1/13",
+        "Hits": "1/5"
+    },
+    "2214": {
+        "N/A": "There are no specific pull rates for Poké Card Creator Pack."
+    },
+    "2278": {
+        "rare Ultra": "1/26",
+        "rare Ultra - Pokémon (Full-Art)": "1/48",
+        "rare Ultra - Trainer (Full-Art)": "1/59",
+        "rare Holo GX": "1/10",
+        "rare Rainbow": "1/82",
+        "rare Secret": "1/114",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/114",
+        "rare Prism Star": "1/18",
+        "Hits": "1/5"
+    },
+    "2282": {
+        "N/A": "There are no specific pull rates for World Championship Decks."
+    },
+    "2289": {
+        "N/A": "There are no specific pull rates for Blister Exclusives."
+    },
+    "2295": {
+        "rare Ultra": "1/14",
+        "rare Ultra - Pokémon (Full-Art)": "1/32",
+        "rare Ultra - Trainer (Full-Art)": "1/26",
+        "rare Holo GX": "1/6",
+        "rare Rainbow": "1/43",
+        "rare Secret": "1/130",
+        "rare Secret - Pokémon (Gold)": "1/389",
+        "rare Secret - Trainer/Energy (Gold)": "1/195",
+        "rare Prism Star": "1/9",
+        "Hits": "1/3"
+    },
+    "2328": {
+        "rare Ultra": "1/23",
+        "rare Ultra - Pokémon (Full-Art)": "1/32",
+        "rare Ultra - Trainer (Full-Art)": "1/80",
+        "rare Holo GX": "1/10",
+        "rare Rainbow": "1/75",
+        "rare Secret": "1/98",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/98",
+        "rare Prism Star": "1/8",
+        "Hits": "1/3"
+    },
+    "2332": {
+        "N/A": "There are no specific pull rates for Professor Program Promos."
+    },
+    "2364": {
+        "N/A": "There are no specific pull rates for the 2018 McDonald's Collection."
+    },
+    "2374": {
+        "N/A": "There are no specific pull rates for Sword & Shield Promos."
+    },
+    "2377": {
+        "rare Ultra": "1/21",
+        "rare Ultra - Pokémon (Full-Art)": "1/42",
+        "rare Ultra - Trainer (Full-Art)": "1/42",
+        "rare Holo GX": "1/12",
+        "rare Rainbow": "1/97",
+        "rare Secret": "1/145",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/145",
+        "rare Prism Star": "1/17",
+        "Hits": "1/5"
+    },
+    "2409": {
+        "rare Holo": "1/3",
+        "rare Holo - Pokémon": "1/3",
+        "rare Holo - Trainer": "N/A",
+        "Hits": "1/3"
+    },
+    "2420": {
+        "rare Ultra": "1/24",
+        "rare Ultra - Pokémon (Full-Art)": "1/32",
+        "rare Ultra - Trainer (Full-Art)": "1/100",
+        "rare Holo GX": "1/10",
+        "rare Rainbow": "1/72",
+        "rare Secret": "1/111",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/111",
+        "Hits": "1/6"
+    },
+    "2464": {
+        "rare Ultra": "1/23",
+        "rare Ultra - Pokémon (Full-Art)": "1/31",
+        "rare Ultra - Trainer (Full-Art)": "1/85",
+        "rare Holo GX": "1/8",
+        "rare Rainbow": "1/69",
+        "rare Secret": "1/111",
+        "rare Secret - Pokémon": "N/A",
+        "rare Secret - Trainer/Energy (Gold)": "1/111",
+        "Hits": "1/5"
+    },
+    "2480": {
+        "rare Ultra": "1/21",
+        "rare Ultra - Pokémon (Full-Art)": "1/69",
+        "rare Ultra - Trainer (Full-Art)": "1/29",
+        "rare Holo GX": "1/7",
+        "rare Rainbow": "1/59",
+        "rare Secret": "1/56",
+        "rare Secret - Pokémon (Gold)": "1/132",
+        "rare Secret - Trainer/Energy (Gold)": "1/99",
+        "rare Shiny": "1/4",
+        "rare Shiny GX": "1/9",
+        "Hits": "1/2"
+    },
+    "2534": {
+        "rare Ultra": "1/27",
+        "rare Ultra - Pokémon (Full-Art)": "1/37",
+        "rare Ultra - Trainer (Full-Art)": "1/101",
+        "rare Holo GX": "1/8",
+        "rare Rainbow": "1/67",
+        "rare Secret": "1/9",
+        "rare Secret - Pokémon (Character)": "1/10",
+        "rare Secret - Trainer/Energy (Gold)": "1/112",
+        "Hits": "1/4"
+    },
+    "2545": {
+        "N/A": "There are no specific pull rates for Sword & Shield Promos."
+    },
+    "2555": {
+        "N/A": "There are no specific pull rates for the 2019 McDonald's Collection."
+    },
+    "2585": {
+        "Ultra Rare": "1/27",
+        "Ultra Rare - Pokémon (Full-Art)": "1/35",
+        "Ultra Rare - Trainer (Full-Art)": "1/113",
+        "Holo Rare V": "1/7",
+        "Holo Rare VMAX": "1/45",
+        "Rainbow Rare": "1/81",
+        "Rainbow Rare - Pokémon (Full-Art)": "1/201",
+        "Rainbow Rare - Trainer (Full-Art)": "1/136",
+        "Secret Rare": "1/110",
+        "Secret Rare - Pokémon (Gold)": "1/257",
+        "Secret Rare - Trainer/Energy (Gold)": "1/193",
+        "Hits": "1/4"
+    },
+    "2594": {
+        "N/A": "Refer to Shining Fates for pull rates."
+    },
+    "2626": {
+        "Ultra Rare": "1/27",
+        "Ultra Rare - Pokémon (Full-Art)": "1/33",
+        "Ultra Rare - Trainer (Full-Art)": "1/137",
+        "Holo Rare V": "1/8",
+        "Holo Rare VMAX": "1/29",
+        "Rainbow Rare": "1/67",
+        "Rainbow Rare - Pokémon (Full-Art)": "1/105",
+        "Rainbow Rare - Trainer (Full-Art)": "1/182",
+        "Secret Rare": "1/105",
+        "Secret Rare - Pokémon (Gold)": "1/304",
+        "Secret Rare - Trainer/Energy (Gold)": "1/161",
+        "Hits": "1/4"
+    },
+    "2675": {
+        "Ultra Rare": "1/26",
+        "Ultra Rare - Pokémon (Full-Art)": "1/37",
+        "Ultra Rare - Trainer (Full-Art)": "1/88",
+        "Holo Rare V": "1/8",
+        "Holo Rare VMAX": "1/26",
+        "Rainbow Rare": "1/84",
+        "Rainbow Rare - Pokémon (Full-Art)": "1/129",
+        "Rainbow Rare - Trainer (Full-Art)": "1/240",
+        "Secret Rare": "1/115",
+        "Secret Rare - Pokémon (Gold)": "1/265",
+        "Secret Rare - Trainer/Energy (Gold)": "1/202",
+        "Hits": "1/4"
+    },
+    "2685": {
+        "Ultra Rare": "1/19",
+        "Ultra Rare - Pokémon (Full-Art)": "1/27",
+        "Ultra Rare - Trainer (Full-Art)": "1/61",
+        "Holo Rare V": "1/6",
+        "Holo Rare VMAX": "1/30",
+        "Rainbow Rare": "1/64",
+        "Rainbow Rare - Pokémon (Full-Art)": "1/114",
+        "Rainbow Rare - Trainer (Full-Art)": "1/145",
+        "Secret Rare": "1/76",
+        "Secret Rare - Pokémon (Shiny Charizard)": "1/228",
+        "Secret Rare - Trainer/Energy (Gold Bean Can)": "1/114",
+        "Hits": "1/4"
+    },
+    "2686": {
+        "N/A": "There are no specific pull rates for the 2020 Pokémon Battle Academy."
+    },
+    "2701": {
+        "Amazing Rare": "1/20",
+        "Ultra Rare": "1/24",
+        "Rainbow Rare": "1/31",
+        "Golden Rare": "1/95",
+        "Charizard Reverse Holo": "1/100",
+        "Pikachu VMAX": "1/168",
+        "Pikachu VMAX Rainbow": "1/1092"
+    },
+    "2754": {
+        "Ultra Rare": "1/31",
+        "Ultra Rare - Pokémon (Full-Art)": "1/199",
+        "Ultra Rare - Trainer (Full-Art)": "1/36",
+        "Amazing Rare": "1/17",
+        "Holo Rare V": "1/9",
+        "Holo Rare VMAX": "1/18",
+        "Rainbow Rare": "1/84",
+        "Secret Rare - Pokémon (Gold)": "1/109",
+        "Shiny Rare": "1/4",
+        "Shiny Rare V or VMAX": "1/11",
+        "Hits": "1/2"
+    },
+    "2765": {
+        "Full Art V": "1/48",
+        "Trainer": "1/94",
+        "Rainbow": "1/108",
+        "Golden Rare": "1/117",
+        "Alt Art V": "1/201",
+        "Alt Art VMAX (168, 170)": "1/703",
+        "Tyranitar Alt Art": "1/803"
+    },
+    "2776": {
+        "N/A": "There are no specific pull rates for the First Partner Pack."
+    },
+    "2781": {
+        "N/A": "Refer to Shining Fates for pull rates."
+    },
+    "2782": {
+        "All Cards (Uniform Distribution)": "1/25"
+    },
+    "2807": {
+        "Rare Holo": {
+            "Any Rare Holo": "1/6",
+            "Specific Rare Holo": "1/134"
+        },
+        "Rare Holo V": {
+            "Any Rare Holo V": "1/13",
+            "Specific Rare Holo V": "1/191"
+        },
+        "Rare Holo VMAX": {
+            "Any Rare Holo VMAX": "1/24",
+            "Specific Rare Holo VMAX": "1/190"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/25",
+            "Specific Ultra Rare": "1/975"
+        },
+        "Rainbow Rare": {
+            "Any Rainbow Rare": "1/96",
+            "Specific Rainbow Rare": "1/1920"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/100",
+            "Specific Secret Rare": "1/1500"
+        }
+    },
+    "2848": {
+        "Normal Pokémon V": {
+            "Any Normal Pokémon V": "1/9",
+            "Specific Normal Pokémon V": "1/170"
+        },
+        "Normal Pokémon VMAX": {
+            "Any Normal Pokémon VMAX": "1/18",
+            "Specific Normal Pokémon VMAX": "1/268"
+        },
+        "Full-Art": {
+            "Any Full-Art": "1/36",
+            "Specific Full-Art": "1/972"
+        },
+        "Alt-Art Pokémon V": {
+            "Any Alt-Art Pokémon V": "1/91",
+            "Specific Alt-Art Pokémon V": "1/1001"
+        },
+        "Alt-Art Pokémon VMAX": {
+            "Any Alt-Art Pokémon VMAX": "1/332",
+            "Specific Alt-Art Pokémon VMAX": "1/1994"
+        },
+        "Rainbow Rare": {
+            "Any Rainbow Rare": "1/118",
+            "Specific Rainbow Rare": "1/1894"
+        },
+        "Gold Rare": {
+            "Any Gold Rare": "1/109",
+            "Specific Gold Rare": "1/1313"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening a GR, RR, AA VMAX, AA V, or FA": "6%"
+        }
+    },
+    "2867": {
+        "Rare Holo": {
+            "Any Rare Holo": "3/1",
+            "Specific Rare Holo": "1/5"
+        },
+        "Classic Collection": {
+            "Any Classic Collection Card": "1/3",
+            "Specific Classic Collection Card": "1/63"
+        },
+        "Rare Holo V": {
+            "Any Rare Holo V": "1/3",
+            "Specific Rare Holo V": "1/14"
+        },
+        "Rare Holo VMAX": {
+            "Any Rare Holo VMAX": "1/13",
+            "Specific Rare Holo VMAX": "1/26"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/25",
+            "Specific Ultra Rare": "1/25"
+        },
+        "Secret Rare": {
+            "Any Secret Rare": "1/150",
+            "Specific Secret Rare": "1/150"
+        }
+    },
+    "2906": {
+        "Holo VMAX": "1/30",
+        "Full-Art V": "1/58",
+        "Full-Art Trainer": "1/64",
+        "Rainbow Rare": "1/127",
+        "Golden Rare": "1/120",
+        "Alt-Art V": "1/180",
+        "Alt-Art VMAX": "1/332",
+        "Elesa's Sparkle (Ultra Rare)": "1/332",
+        "Mew V (Ultra Rare)": "1/540",
+        "Celebi V (Ultra Rare)": "1/617",
+        "Genesect V (Ultra Rare)": "1/864",
+        "Mew VMAX (Secret Rainbow Rare)": "1/864",
+        "Inteleon VMAX (Secret Rare)": "1/1080",
+        "Gengar VMAX (Secret Rare)": "1/1080",
+        "Espeon VMAX (Secret Rare)": "1/1440",
+        "Mew VMAX (Secret Rare)": "1/2160"
+    },
+    "2931": {
+        "Dark Gyarados": "1/30",
+        "Claydol": "1/33",
+        "Rocket's Zapdos": "1/36",
+        "Team Magma's Groudon": "1/38",
+        "Imposter Professor Oak": "1/38",
+        "Here Comes Team Rocket!": "1/40",
+        "Cleffa": "1/46",
+        "Rocket's Admin.": "1/46",
+        "Blastoise": "1/47",
+        "Venusaur": "1/49",
+        "Birthday Pikachu": "1/52",
+        "Garchomp C LV.X": "1/64",
+        "Donphan": "1/78",
+        "Reshiram": "1/86",
+        "Luxray GL LV.X": "1/91",
+        "Gardevoir ex": "1/94",
+        "Mew ex": "1/94",
+        "Zekrom": "1/106",
+        "M Rayquaza-EX": "1/119",
+        "Umbreon (Gold Star)": "1/119",
+        "Shining Magikarp": "1/128",
+        "Mewtwo-EX": "1/139",
+        "Charizard": "1/139",
+        "Xerneas-EX": "1/161",
+        "Tapu Lele-GX": "1/161"
+    },
+    "2948": {
+        "Rare Holo": "1/4",
+        "Rare Holo V": "1/7",
+        "Ultra Rare": "1/20",
+        "Rare Holo VMAX": "1/53",
+        "Rare Holo VSTAR": "1/53",
+        "Secret Rare Holo": "1/67",
+        "Rare Rainbow": "1/78"
+    },
+    "3020": {
+        "Any Trainer Gallery Card": "1/8"
+    },
+    "3040": {
+        "Ultra Rare (1/5)": {
+            "Normal Pokémon V": {
+                "Any Normal Pokémon V": "1/8",
+                "Specific Normal Pokémon V": "1/152"
+            },
+            "Normal Pokémon VMAX or VSTAR": {
+                "Any Normal Pokémon VMAX/VSTAR": "1/29",
+                "Specific Normal Pokémon VMAX/VSTAR": "1/259"
+            },
+            "Full-Art Pokémon V": {
+                "Any Full-Art Pokémon V": "1/47",
+                "Specific Full-Art Pokémon V": "1/704"
+            },
+            "Full-Art Trainer": {
+                "Any Full-Art Trainer": "1/93",
+                "Specific Full-Art Trainer": "1/836"
+            },
+            "Alt-Art Pokémon V": {
+                "Any Alt-Art Pokémon V": "1/135",
+                "Specific Alt-Art Pokémon V": "1/810"
+            }
+        },
+        "Trainer Gallery": "1/8",
+        "Secret Rare (1/49)": {
+            "Rainbow Rare": {
+                "Any Rainbow Rare": "1/78",
+                "Specific Rainbow Rare": "1/1401"
+            },
+            "Gold Rare": {
+                "Any Gold Rare": "1/130",
+                "Specific Rainbow Rare": "1/1178"
+            }
+        },
+        "Hit Rate": {
+            "Chance of opening at least 1 Trainer Gallery, Ultra Rare, or Secret Rare": "32%"
+        }
+    },
+    "3051": {
+        "N/A": "There are no specific pull rates for the 2022 Pokémon Battle Academy."
+    },
+    "3064": {
+        "Rare Holo": "1/2",
+        "Rare Holo V": "1/6",
+        "Rare Radiant": "1/19",
+        "Ultra Rare": "1/19",
+        "Rare Holo VSTAR": "1/27",
+        "Rare Rainbow": "1/31",
+        "Rare Holo VMAX": "1/46",
+        "Secret Rare Holo": "1/185"
+    },
+    "3068": {
+        "Non-V Pokémon": {
+            "Any Non-V Pokémon": "1/12",
+            "Specific Non-V Pokémon": "1/141"
+        },
+        "Pokémon V, Pokémon VMAX, or Trainer": {
+            "Any Pokémon V, Pokémon VMAX, or Trainer": "1/24",
+            "Specific Pokémon V, Pokémon VMAX, or Trainer": "1/390"
+        }
+    },
+    "3087": {
+        "N/A": "There are no specific pull rates for the 2016 McDonald's Collection."
+    },
+    "3118": {
+        "Ultra Rare (1/5)": {
+            "Normal Pokémon V": {
+                "Any Normal Pokémon V": "1/9",
+                "Specific Normal Pokémon V": "1/103"
+            },
+            "Normal Pokémon VMAX or VSTAR": {
+                "Any Normal Pokémon VMAX/VSTAR": "1/23",
+                "Specific Normal Pokémon VMAX/VSTAR": "1/158"
+            },
+            "Full-Art Pokémon V": {
+                "Any Full-Art Pokémon V": "1/51",
+                "Specific Full-Art Pokémon V": "1/657"
+            },
+            "Full-Art Trainer": {
+                "Any Full-Art Trainer": "1/70",
+                "Specific Full-Art Trainer": "1/562"
+            },
+            "Alt-Art Pokémon V": {
+                "Any Alt-Art Pokémon V": "1/201",
+                "Specific Alt-Art Pokémon V": "1/804"
+            }
+        },
+        "Trainer Gallery": "1/8",
+        "Radiant Rare (1/20)": {
+            "Any Radiant Rare": "1/20",
+            "Specific Radiant Rare": "1/60"
+        },
+        "Secret Rare (1/49)": {
+            "Rainbow Rare": {
+                "Any Rainbow Rare": "1/70",
+                "Specific Rainbow Rare": "1/1045"
+            },
+            "Gold Rare": {
+                "Any Gold Rare": "1/114",
+                "Specific Rainbow Rare": "1/682"
+            }
+        },
+        "Hit Rate": {
+            "Chance of opening at least 1 Trainer Gallery, Ultra Rare, or Secret Rare": "32%"
+        }
+    },
+    "3150": {
+        "N/A": "There are no specific pull rates for the 2022 McDonald's Match Battle set."
+    },
+    "3170": {
+        "Ultra Rare (1/5)": {
+            "Normal Pokémon V": {
+                "Any Normal Pokémon V": "1/9",
+                "Specific Normal Pokémon V": "1/131"
+            },
+            "Normal Pokémon VMAX or VSTAR": {
+                "Any Normal Pokémon VMAX/VSTAR": "1/27",
+                "Specific Normal Pokémon VMAX/VSTAR": "1/189"
+            },
+            "Full-Art Pokémon V": {
+                "Any Full-Art Pokémon V": "1/48",
+                "Specific Full-Art Pokémon V": "1/675"
+            },
+            "Full-Art Trainer": {
+                "Any Full-Art Trainer": "1/99",
+                "Specific Full-Art Trainer": "1/866"
+            },
+            "Alt-Art Pokémon V": {
+                "Any Alt-Art Pokémon V": "1/168",
+                "Specific Alt-Art Pokémon V": "1/674"
+            }
+        },
+        "Trainer Gallery": "1/8",
+        "Radiant Rare (1/22)": {
+            "Any Radiant Rare": "1/22",
+            "Specific Radiant Rare": "1/64"
+        },
+        "Secret Rare (1/45)": {
+            "Rainbow Rare": {
+                "Any Rainbow Rare": "1/80",
+                "Specific Rainbow Rare": "1/1192"
+            },
+            "Gold Rare": {
+                "Any Gold Rare": "1/106",
+                "Specific Rainbow Rare": "1/652"
+            }
+        },
+        "Hit Rate": {
+            "Chance of opening at least 1 Trainer Gallery, Ultra Rare, or Secret Rare": "31%"
+        }
+    },
+    "3172": {
+        "Non-V Pokémon": {
+            "Any Non-V Pokémon": "1/12",
+            "Specific Non-V Pokémon": "1/133"
+        },
+        "Pokémon V, Pokémon VMAX, or Trainer": {
+            "Any Pokémon V, Pokémon VMAX, or Trainer": "1/32",
+            "Specific Pokémon V, Pokémon VMAX, or Trainer": "1/536"
+        },
+        "Gold-and-Black Pokémon VMAX": {
+            "Any Gold-and-Black Pokémon VMAX": "1/117",
+            "Specific Gold-and-Black Pokémon VMAX": "1/234"
+        }
+    },
+    "3179": {
+        "N/A": "There are no specific pull rates for the 2022 Pokémon TCG: Trick or Trade BOOster Bundle."
+    },
+    "17674": {
+        "Non-V Pokémon": {
+            "Any Non-V Pokémon": "1/12",
+            "Specific Non-V Pokémon": "1/134"
+        },
+        "Pokémon V, Pokémon VMAX, or Trainer": {
+            "Any Pokémon V, Pokémon VMAX, or Trainer": "1/32",
+            "Specific Pokémon V, Pokémon VMAX, or Trainer": "1/563"
+        },
+        "Gold-and-Black Pokémon VMAX": {
+            "Any Gold-and-Black Pokémon VMAX": "1/111",
+            "Specific Gold-and-Black Pokémon VMAX": "1/228"
+        }
+    },
+    "17688": {
+        "Galarian Gallery": "1/3",
+        "Ultra Rare (1/5)": {
+            "Pokémon V": {
+                "Any Pokémon V": "1/8",
+                "Specific Pokémon V": "1/142"
+            },
+            "Pokémon VMAX or VSTAR": {
+                "Any Pokémon VMAX/VSTAR": "1/19",
+                "Specific Pokémon VMAX/VSTAR": "1/273"
+            },
+            "Texture Energy": {
+                "Any Texture Energy": "1/53",
+                "Specific Texture Energy": "1/602"
+            },
+            "Full-Art Trainer": {
+                "Any Full-Art Trainer": "1/105",
+                "Specific Full-Art Trainer": "1/613"
+            }
+        },
+        "Radiant Rare (1/22)": {
+            "Any Radiant Rare": "1/22",
+            "Specific Radiant Rare": "1/69"
+        },
+        "Signature Trainer (1/13)": {
+            "Any Signature Trainer": "1/13",
+            "Specific Signature Trainer": "1/376"
+        },
+        "Secret Rare (1/133)": "1/133",
+        "Hit Rate": {
+            "Chance of opening at least 1 Galarian Gallery, Ultra Rare, or Secret Rare": "49%"
+        }
+    },
+    "17689": {
+        "Non-V Pokémon": {
+            "Any Non-V Pokémon": "1/4",
+            "Specific Non-V Pokémon": "1/167"
+        },
+        "Pokémon V or Trainer": {
+            "Any Pokémon V or Trainer": "1/8",
+            "Specific Pokémon V or Trainer": "1/291"
+        },
+        "Gold VSTAR": {
+            "Any Gold VSTAR": "1/125",
+            "Specific Gold VSTAR": "1/600"
+        }
+    },
+    "22872": {
+        "N/A": "There are no specific pull rates for Scarlet & Violet Promos."
+    },
+    "22873": {
+        "Double Rare": {
+            "Any Double Rare": "1/7",
+            "Specific Double Rare": "1/87"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/309"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/313"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/32",
+            "Specific Special Illustration Rare": "1/318"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/54",
+            "Specific Hyper Rare": "1/324"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 Hyper Rare, Special Illustration, Illustration, or Ultra Rare": "18%"
+        }
+    },
+    "22880": {
+        "N/A": "There are no specific pull rates for Play! Pokémon Prize Pack Series Cards."
+    },
+    "23095": {
+        "N/A": "There are no specific pull rates for the Ash vs Team Rocket Deck Kit."
+    },
+    "23120": {
+        "Double Rare": {
+            "Any Double Rare": "1/7",
+            "Specific Double Rare": "1/124"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/391"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/468"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/32",
+            "Specific Special Illustration Rare": "1/473"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/57",
+            "Specific Hyper Rare": "1/512"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 Hyper Rare, Special Illustration Rare, Illustration Rare, or Ultra Rare": "18%"
+        }
+    },
+    "23228": {
+        "Double Rare": {
+            "Any Double Rare": "1/7",
+            "Specific Double Rare": "1/154"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/181"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/158"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/32",
+            "Specific Special Illustration Rare": "1/192"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/52",
+            "Specific Hyper Rare": "1/156"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 Hyper Rare, Special Illustration Rare, Illustration Rare, or Ultra Rare": "18%"
+        }
+    },
+    "23237": {
+        "Foil Energy": {
+            "Any Foil Energy": "1/4",
+            "Specific Foil Energy": "1/32"
+        },
+        "Double Rare": {
+            "Any Double Rare": "1/8",
+            "Specific Double Rare": "1/90"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/16",
+            "Specific Ultra Rare": "1/248"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/12",
+            "Specific Illustration Rare": "1/188"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/32",
+            "Specific Special Illustration Rare": "1/225"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/51",
+            "Specific Hyper Rare": "1/154"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, or UR": "19%"
+        }
+    },
+    "23266": {
+        "N/A": "There are no specific pull rates for the 2023 Pokémon TCG: Trick or Trade BOOster Bundle."
+    },
+    "23286": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/128"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/421"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/442"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/47",
+            "Specific Special Illustration Rare": "1/712"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/82",
+            "Specific Hyper Rare": "1/576"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, or UR": "17%"
+        }
+    },
+    "23306": {
+        "N/A": "There are no specific pull rates for the 2023 McDonald's Match Battle set."
+    },
+    "23323": {
+        "N/A": "There are no specific pull rates for Pokémon TCG Classic."
+    },
+    "23330": {
+        "N/A": "There are no specific pull rates for the Pokémon TCG: My First Battle Kits."
+    },
+    "23353": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/63"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/76"
+        },
+        "Shiny Rare": {
+            "Any Shiny Rare": "1/4",
+            "Specific Shiny Rare": "1/472"
+        },
+        "Shiny Ultra Rare": {
+            "Any Shiny Ultra Rare": "1/13",
+            "Specific Shiny Ultra Rare": "1/155"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/14",
+            "Specific Illustration Rare": "1/42"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/58",
+            "Specific Special Illustration Rare": "1/465"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/62",
+            "Specific Hyper Rare": "1/372"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, UR, SUR, or SR": "44%"
+        }
+    },
+    "23381": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/89"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/270"
+        },
+        "ACE SPEC Rare": {
+            "Any Shiny Rare": "1/20",
+            "Specific Shiny Rare": "1/140"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/285"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/86",
+            "Specific Special Illustration Rare": "1/855"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/139",
+            "Specific Hyper Rare": "1/836"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, UR, or AS": "20%"
+        }
+    },
+    "23473": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/83"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/318"
+        },
+        "ACE SPEC Rare": {
+            "Any Shiny Rare": "1/20",
+            "Specific Shiny Rare": "1/119"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/272"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/86",
+            "Specific Special Illustration Rare": "1/941"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/146",
+            "Specific Hyper Rare": "1/879"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, UR, or AS": "20%"
+        }
+    },
+    "23520": {
+        "N/A": "There are no specific pull rates for the 2024 Pokémon Battle Academy."
+    },
+    "23529": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/36"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/150"
+        },
+        "ACE SPEC Rare": {
+            "Any Shiny Rare": "1/20",
+            "Specific Shiny Rare": "1/60"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/12",
+            "Specific Illustration Rare": "1/180"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/67",
+            "Specific Special Illustration Rare": "1/335"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/144",
+            "Specific Hyper Rare": "1/720"
+        }
+    },
+    "23537": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/83"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/163"
+        },
+        "ACE SPEC Rare": {
+            "Any Shiny Rare": "1/20",
+            "Specific Shiny Rare": "1/60"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/167"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/90",
+            "Specific Special Illustration Rare": "1/540"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/137",
+            "Specific Hyper Rare": "1/411"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, UR, or AS": "20%"
+        }
+    },
+    "23561": {
+        "N/A": "There are no specific pull rates for the 2024 Pokémon TCG: Trick or Trade BOOster Bundle."
+    },
+    "23651": {
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/106"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/312"
+        },
+        "ACE SPEC Rare": {
+            "Any Shiny Rare": "1/20",
+            "Specific Shiny Rare": "1/159"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/13",
+            "Specific Illustration Rare": "1/300"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/87",
+            "Specific Special Illustration Rare": "1/960"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/188",
+            "Specific Hyper Rare": "1/1127"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, UR, or AS": "20%"
+        }
+    },
+    "23821": {
+        "Poké Ball Foil": {
+            "Any Poké Ball Foil": "1/3",
+            "Specific Poké Ball Foil": "1/302"
+        },
+        "Double Rare": {
+            "Any Double Rare": "1/6",
+            "Specific Double Rare": "1/106"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/13",
+            "Specific Ultra Rare": "1/161"
+        },
+        "ACE SPEC Rare": {
+            "Any ACE SPEC": "1/21",
+            "Specific ACE SPEC": "1/128"
+        },
+        "Master Ball Foil": {
+            "Any Master Ball Foil": "1/20",
+            "Specific Master Ball Foil": "1/1362"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/45",
+            "Specific Special Illustration Rare": "1/1440"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/180",
+            "Specific Hyper Rare": "1/900"
+        },
+        "Secret Rare or Master Ball or ACE SPEC Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, MB, UR, or AS": "19%"
+        }
+    },
+    "24073": {
+        "Double Rare": {
+            "Any Double Rare": "1/5",
+            "Specific Double Rare": "1/79"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/15",
+            "Specific Ultra Rare": "1/168"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/12",
+            "Specific Illustration Rare": "1/129"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/86",
+            "Specific Special Illustration Rare": "1/518"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/137",
+            "Specific Hyper Rare": "1/411"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, or UR": "16%"
+        }
+    },
+    "24163": {
+        "Holo": {
+            "Any Holo": "1/1",
+            "Specific Holo": "1/7"
+        }
+    },
+    "24269": {
+        "Double Rare": {
+            "Any Double Rare": "1/5",
+            "Specific Double Rare": "1/86"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/16",
+            "Specific Ultra Rare": "1/344"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/12",
+            "Specific Illustration Rare": "1/278"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/94",
+            "Specific Special Illustration Rare": "1/1033"
+        },
+        "Hyper Rare": {
+            "Any Hyper Rare": "1/149",
+            "Specific Hyper Rare": "1/894"
+        },
+        "Secret Rare Hit Rate": {
+            "Chance of opening at least 1 HR, SIR, IR, or UR": "16%"
+        }
+    },
+    "24325": {
+        "Poké Ball Foil": {
+            "Any Poké Ball Foil": "1/3",
+            "Specific Poké Ball Foil": "1/488"
+        },
+        "Double Rare": {
+            "Any Double Rare": "1/5",
+            "Specific Double Rare": "1/57"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/17",
+            "Specific Ultra Rare": "1/274"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/6",
+            "Specific Illustration Rare": "1/848"
+        },
+        "Master Ball Foil": {
+            "Any Master Ball Foil": "1/19",
+            "Specific Master Ball Foil": "1/2802"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/80",
+            "Specific Special Illustration Rare": "1/1120"
+        },
+        "Black White Rare": {
+            "Any Black White Rare": "Unknown",
+            "Specific Black White Rare": "Unknown"
+        },
+        "Secret Rare or Master Ball Hit Rate": {
+            "Chance of opening at least 1 BWR, SIR, MB, UR, or IR": "26%"
+        }
+    },
+    "24326": {
+        "Poké Ball Foil": {
+            "Any Poké Ball Foil": "1/3",
+            "Specific Poké Ball Foil": "1/488"
+        },
+        "Double Rare": {
+            "Any Double Rare": "1/5",
+            "Specific Double Rare": "1/57"
+        },
+        "Ultra Rare": {
+            "Any Ultra Rare": "1/17",
+            "Specific Ultra Rare": "1/274"
+        },
+        "Illustration Rare": {
+            "Any Illustration Rare": "1/6",
+            "Specific Illustration Rare": "1/848"
+        },
+        "Master Ball Foil": {
+            "Any Master Ball Foil": "1/19",
+            "Specific Master Ball Foil": "1/2802"
+        },
+        "Special Illustration Rare": {
+            "Any Special Illustration Rare": "1/80",
+            "Specific Special Illustration Rare": "1/1120"
+        },
+        "Black White Rare": {
+            "Any Black White Rare": "Unknown",
+            "Specific Black White Rare": "Unknown"
+        },
+        "Secret Rare or Master Ball Hit Rate": {
+            "Chance of opening at least 1 BWR, SIR, MB, UR, or IR": "26%"
+        }
+    },
     "24380": {
         "Double Rare": {
             "Any Double Rare": "1/5",
@@ -228,8 +1949,10 @@
             "Specific Mega Hyper Rare": "1/2520"
         },
         "Secret Rare Hit Rate": {
-            "Chance of opening at least 1 Mega Hyper Rare, Special Illustration Rare, Illustration Rare, or Ultra Rare": "19%"
+            "Chance of opening at least 1 MHR, SIR, IR, or UR": "19%"
         }
     },
-    "24382": {}
+    "24382": {
+        "N/A": "No specific information available regarding a 'pull rate' for this set."
+    }
 }

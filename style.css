@@ -45,8 +45,8 @@ html.dark {
 /* ===================== */
 html,
 body {
-  font-family: "Fredoka One", sans-serif;
-  font-weight: 200;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
   background: var(--bg);
   color: var(--text);
   margin: 0;
@@ -163,7 +163,7 @@ h4 {
   cursor: pointer;
   background-color: var(--negative);
   color: #fff;
-  font-weight: bold;
+  font-weight: 400;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
@@ -309,7 +309,7 @@ footer .disclaimer {
 
 .set-row-title h3 {
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -445,7 +445,7 @@ footer .disclaimer {
 .article-card__title,
 .martech-card_content h3 {
   font-size: 1.25rem;
-  font-weight: bold;
+  font-weight: 400;
   color: var(--heading-color);
   margin-bottom: 0.5rem;
 }
@@ -504,7 +504,7 @@ footer .disclaimer {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  font-family: Arial, sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 .spinner {
@@ -563,7 +563,7 @@ footer .disclaimer {
 .tickerItem {
   display: inline-block;
   margin-right: 60px;
-  font-weight: bold;
+  font-weight: 400;
   font-size: 0.95rem;
 }
 

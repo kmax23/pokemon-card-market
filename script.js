@@ -674,6 +674,20 @@ async function renderCardIndexChart() {
 // -------------------------
 // 11. FETCH SETS
 // -------------------------
+function renderPullRates(rates) {
+    if (!rates) return "<p>No pull rate data available.</p>";
+
+    let html = "<ul class='pull-rate-list'>";
+    for (const [key, value] of Object.entries(rates)) {
+        if (typeof value === "object") {
+            html += `<li><strong>${key}:</strong>${renderPullRates(value)}</li>`;
+        } else {
+            html += `<li>${key}: <span class='rate-value'>${value}</span></li>`;
+        }
+    }
+    html += "</ul>";
+    return html;
+}
 let pullRates = [];
 
 async function fetchPullRates() {
@@ -700,18 +714,6 @@ async function loadSets() {
         setsData.forEach(set => {
             const rates = pullRates[String(set.id)] || {};
 
-            const doubleAny = rates["Double Rare"]?.["Any Double Rare"] ?? "--";
-            const doubleSpecific = rates["Double Rare"]?.["Specific Double Rare"] ?? "--";
-            const ultraAny = rates["Ultra Rare"]?.["Any Ultra Rare"] ?? "--";
-            const ultraSpecific = rates["Ultra Rare"]?.["Specific Ultra Rare"] ?? "--";
-            const illustrationAny = rates["Illustration Rare"]?.["Any Illustration Rare"] ?? "--";
-            const illustrationSpecific = rates["Illustration Rare"]?.["Specific Illustration Rare"] ?? "--";
-            const specialIllustrationAny = rates["Special Illustration Rare"]?.["Any Special Illustration Rare"] ?? "--";
-            const specialIllustrationSpecific = rates["Special Illustration Rare"]?.["Specific Special Illustration Rare"] ?? "--";
-            const megaHyperAny = rates["Mega Hyper Rare"]?.["Any Mega Hyper Rare"] ?? "--";
-            const megaHyperSpecific = rates["Mega Hyper Rare"]?.["Specific Mega Hyper Rare"] ?? "--";
-            const secretRare = rates["Secret Rare Hit Rate"]?.["Chance of opening at least 1 Mega Hyper Rare, Special Illustration Rare, Illustration Rare, or Ultra Rare"] ?? "--";
-
             const card = document.createElement("div");
             card.className = "set-card";
 
@@ -721,43 +723,21 @@ async function loadSets() {
 
             const symbolHTML = set.symbol_url
                 ? `<img class="set-symbol" src="${set.symbol_url}" alt="${set.name} symbol">`
-                : `<div class="set-symbol-placeholder">No Symbol Yet</div>`;
+                : ``;
 
             const expandedId = `expanded-${set.id}`;
             const tbodyId = `setCardsBody-${set.id}`;
 
             card.innerHTML = `
-                <!-- ROW 1: Logo -->
-                <div class="set-row set-row-logo" style="text-align: center; margin-bottom: 0.5rem;">
+                <div class="set-row set-row-logo">
                     ${logoHTML}
                 </div>
-                
-                <!-- ROW 2: Symbol + Set Name -->
-                <div class="set-row set-row-title" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <div class="set-row set-row-title">
                     ${symbolHTML}
-                    <h3 style="margin: 0;">${set.name}</h3>
+                    <h3>${set.name}</h3>
                 </div>
                 
-                <!-- ROW 3: Two columns -->
-                <div class="set-row set-row-info" style="display: flex; justify-content: space-between; gap: 2rem;">
-                    <!-- Left column: Total Market Value + Release Date -->
-                    <div class="set-info-left" style="flex: 1; font-size: 1.6rem;">
-                        <p><strong>Total Market Value:</strong> $${set.market_value_total?.toLocaleString() ?? "0"}</p>
-                        <p><strong>Release Date:</strong> ${set.release_date ?? "—"}</p>
-                    </div>
-
-                    <!-- Right column: Pull Rates -->
-                    <div class="set-info-right" style="flex: 1; text-align: center;">
-                        <div class="pull-rate">
-                            <p><strong>Double Rare:</strong><br>Any Double Rare: ${doubleAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Double Rare: ${doubleSpecific}</p>
-                            <p><strong>Ultra Rare:</strong><br>Any Ultra Rare: ${ultraAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Ultra Rare: ${ultraSpecific}</p>
-                            <p><strong>Illustration Rare:</strong><br>Any Illustration Rare: ${illustrationAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Illustration Rare: ${illustrationSpecific}</p>
-                            <p><strong>Special Illustration Rare:</strong><br>Any Special Illustration Rare: ${specialIllustrationAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Special Illustration Rare: ${specialIllustrationSpecific}</p>
-                            <p><strong>Mega Hyper Rare:</strong><br>Any Mega Hyper Rare: ${megaHyperAny}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific Mega Hyper Rare: ${megaHyperSpecific}</p>
-                            <p><strong>Secret Rare Hit Rate:</strong> ${secretRare}</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- ROW 3: Injected dynamically when expanded -->
             `;
 
             // Toggle open/close on click
@@ -775,6 +755,7 @@ async function loadSets() {
                     }
                     expandedCard.classList.remove("expanded");
                     expandedCard.querySelector(".set-cards-container")?.remove();
+                    expandedCard.querySelector(".set-row-info")?.remove();
                 }
 
                 if (!expanded) {
@@ -787,6 +768,34 @@ async function loadSets() {
                     // Move the card to the top of the grid
                     grid.prepend(card);
                     card.classList.add("expanded");
+
+                    // Scroll to the expanded card smoothly
+                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                    // Inject info section dynamically
+                    let infoSection = card.querySelector(".set-row-info");
+                    if (!infoSection) {
+                        infoSection = document.createElement("div");
+                        infoSection.className = "set-row set-row-info";
+                        infoSection.style.display = "flex";
+                        infoSection.style.justifyContent = "space-between";
+                        infoSection.style.gap = "2rem";
+                        infoSection.innerHTML = `
+                            <!-- Left column: Total Market Value + Release Date -->
+                            <div class="set-info-left">
+                                <p><strong>Total Market Value:</strong> $${set.market_value_total?.toLocaleString() ?? "0"}</p>
+                                <p><strong>Release Date:</strong> ${set.release_date ?? "—"}</p>
+                            </div>
+
+                            <!-- Right column: Pull Rates -->
+                            <div class="set-info-right">
+                                <h4>Pull Rates</h4>
+                                ${renderPullRates(rates)}
+                            </div>
+                        `;
+                        const titleRow = card.querySelector(".set-row-title");
+                        titleRow.insertAdjacentElement("afterend", infoSection);
+                    }
 
                     // Create container for card table
                     let container = card.querySelector(".set-cards-container");
@@ -817,10 +826,14 @@ async function loadSets() {
                     // Restore card to its placeholder position
                     const placeholderId = card.dataset.placeholder;
                     const ref = document.querySelector(`[data-placeholder-id="${placeholderId}"]`);
-                    if (ref) ref.replaceWith(card);
-                    card.classList.remove("expanded");
+                    if (ref) {
+                        ref.replaceWith(card);
+                        card.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
 
+                    card.classList.remove("expanded");
                     card.querySelector(".set-cards-container")?.remove();
+                    card.querySelector(".set-row-info")?.remove();
                 }
             });
 

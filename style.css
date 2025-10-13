@@ -238,165 +238,166 @@ footer .disclaimer {
 }
 
 /* ============== */
-/* SETS GRID      */
+/* SETS GRID (UPDATED + OPTIMIZED) */
 /* ============== */
+
 #setsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 2rem 2rem;
+  background: var(--bg);
+  margin-top: 1rem;
 }
 
+/* Individual Set Cards */
 .set-card {
-  width: 100%;
-  box-sizing: border-box;
-  background: var(--card-bg, #fff);
-  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
   border-radius: 8px;
-  padding: 1rem;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: all 0.2s ease;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  color: inherit;
+  position: relative;
 }
 
+.set-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background-color: var(--card-hover);
+}
+
+/* Expanded card layout */
 .set-card.expanded {
   grid-column: 1 / -1;
   width: 100%;
   z-index: 10;
 }
 
-.set-expanded {
-  display: none;
-  margin: 1rem auto;
-  max-width: 95%;
+/* LOGO row */
+.set-row-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  overflow-x: auto;
-  /* keeps table inside card */
+}
+
+.set-logo {
+  max-width: 150px;
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+/* TITLE row */
+.set-row-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.set-symbol {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.set-row-title h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* INFO row (added dynamically when expanded) */
+.set-row-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+}
+
+.set-info-left {
+  flex: 1;
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.set-info-left strong {
+  color: var(--accent, #2e8b57);
+}
+
+.set-info-right {
+  flex: 1;
+  text-align: left;
+}
+
+.set-info-right h4 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: var(--accent, #2e8b57);
+}
+
+.pull-rate {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Expanded content (card table) */
+.set-cards-container {
+  margin-top: 1rem;
   padding: 1rem;
   background: var(--card-bg);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.set-card.expanded .set-expanded {
-  display: block;
-}
-
-.set-expanded table {
-  width: 100%;
-  table-layout: auto;
-  border-collapse: collapse;
-}
-
-.set-card:hover {
-  background: rgba(59, 76, 202, 0.05);
-  transform: translateY(-5px);
-}
-
-.set-details {
+/* CARD TABLE (when expanded) */
+.set-cards-container {
   margin-top: 1rem;
-}
-
-.set-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  gap: 2rem;
-  padding: 0.75rem 1rem;
-}
-
-.set-info-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  flex: 1;
-  font-size: 1.2rem;
-}
-
-.set-info-right {
-  text-align: center;
-  flex: 0 0 auto;
-  overflow-x: auto;
-}
-
-.pull-rate {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.pull-rate strong {
-  color: var(--accent, #2e8b57);
-}
-
-.set-logo {
-  max-width: 120px;
-  max-height: 60px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
-}
-
-.set-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.set-symbol {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .set-card-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  /* keeps columns aligned */
 }
 
 .set-card-table th,
 .set-card-table td {
-  padding: 8px;
-  text-align: left;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
+  text-align: left;
   vertical-align: middle;
-  overflow: hidden;
 }
 
-/* Define column widths explicitly */
+/* Define column widths */
 .set-card-table th:nth-child(1),
-.set-card-table td:nth-child(1) {
-  width: 20%;
-}
-/* Card Name */
+.set-card-table td:nth-child(1) { width: 20%; }
 
 .set-card-table th:nth-child(2),
-.set-card-table td:nth-child(2) {
-  width: 25%;
-}
-/* Rarity */
-
+.set-card-table td:nth-child(2),
 .set-card-table th:nth-child(3),
-.set-card-table td:nth-child(3) {
-  width: 25%;
-}
-/* Latest Price */
-
+.set-card-table td:nth-child(3),
 .set-card-table th:nth-child(4),
-.set-card-table td:nth-child(4) {
-  width: 25%;
-}
-/* % Change */
-
+.set-card-table td:nth-child(4),
 .set-card-table th:nth-child(5),
-.set-card-table td:nth-child(5) {
-  width: 25%;
-}
-/* Trend chart */
-
+.set-card-table td:nth-child(5) { width: 20%; }
 
 /* ============== */
 /* ARTICLE CARDS  */
@@ -692,16 +693,25 @@ footer .disclaimer {
   .articles-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  #setsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
   .articles-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  #setsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
   .articles-grid {
+    grid-template-columns: 1fr;
+  }
+  #setsGrid {
     grid-template-columns: 1fr;
   }
 }
